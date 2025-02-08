@@ -3465,7 +3465,9 @@ min, max 作為河流 對照如今的 預知PE&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;這樣就可以在&lt;code&gt;content/post/&lt;/code&gt;下看到新創的markdown檔&lt;/p&gt;
 &lt;h3 id=&#34;文章調整&#34;&gt;文章調整&lt;/h3&gt;
 &lt;p&gt;基本上我所有的文章都是從jupyter轉換過來&lt;br&gt;
-在用&lt;code&gt;hugo new post&lt;/code&gt; create好md檔之後 得把jupyter轉換過的md檔複製到 hugo格式中 筆記的位置
+在用&lt;code&gt;hugo new post&lt;/code&gt; create好md檔之後&lt;br&gt;
+得把jupyter轉換過的md檔複製到&lt;br&gt;
+hugo格式中&lt;strong&gt;筆記&lt;/strong&gt;的位置
 需要run 這個指令under root (content folder的上一層)&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;jupyter&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nbconvert&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;markdown&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;output&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dir&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ipynb&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;file&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有一個問題是 轉換後圖會被存在另一個folder中&lt;br&gt;
@@ -3474,7 +3476,21 @@ min, max 作為河流 對照如今的 預知PE&lt;/p&gt;
 並用以下command line&lt;br&gt;
 將圖片的url做修改&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_notebook_files&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//\/images\//g&amp;#39; your_notebook.md
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;開幾本地server&#34;&gt;開幾本地server&lt;/h3&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;另一個問題是 jupyter轉md下，dataframe的表現會跑掉&lt;br&gt;
+在每一個notebook中可能有多個dataframe&lt;br&gt;
+故得在notebook最上方執行以下的python code
+將每一個dataframe轉換成html
+就可以在轉成md後正常顯示了&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;from IPython.display import HTML
+import pandas as pd
+
+def display_df_as_html(df):
+    &amp;#34;&amp;#34;&amp;#34;Automatically display DataFrame as an HTML table.&amp;#34;&amp;#34;&amp;#34;
+    display(HTML(df.to_html()))
+
+# Apply function to all DataFrame outputs
+pd.DataFrame._repr_html_ = display_df_as_html
+&lt;/code&gt;&lt;/pre&gt;&lt;h3 id=&#34;開幾本地server&#34;&gt;開幾本地server&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;hugo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先在本地測試預覽用的&lt;/p&gt;
 &lt;h3 id=&#34;打包成靜態網頁檔每次更新過blog內容後&#34;&gt;打包成靜態網頁檔(每次更新過blog內容後)&lt;/h3&gt;
@@ -3495,7 +3511,7 @@ git remote add origin https://github.com/username/my-hugo-site.git
 &lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git add .
 git commit -m &amp;#34;Deploy Hugo site&amp;#34;
 git branch -M main
-git push -f origin main
+git push origin main
 &lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;
 若是網站有更新過後
 要回到root 並重跑&lt;/p&gt;

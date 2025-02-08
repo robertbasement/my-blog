@@ -152,7 +152,9 @@
 </span></span></code></pre></div><p>這樣就可以在<code>content/post/</code>下看到新創的markdown檔</p>
 <h3 id="文章調整">文章調整</h3>
 <p>基本上我所有的文章都是從jupyter轉換過來<br>
-在用<code>hugo new post</code> create好md檔之後 得把jupyter轉換過的md檔複製到 hugo格式中 筆記的位置
+在用<code>hugo new post</code> create好md檔之後<br>
+得把jupyter轉換過的md檔複製到<br>
+hugo格式中<strong>筆記</strong>的位置
 需要run 這個指令under root (content folder的上一層)</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">jupyter</span> <span class="n">nbconvert</span> <span class="o">--</span><span class="n">to</span> <span class="n">markdown</span> <span class="o">--</span><span class="n">output</span><span class="o">-</span><span class="n">dir</span><span class="o">=&lt;</span><span class="n">output</span> <span class="n">dir</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">ipynb</span> <span class="n">file</span><span class="o">&gt;</span>
 </span></span></code></pre></div><p>有一個問題是 轉換後圖會被存在另一個folder中<br>
@@ -161,7 +163,21 @@
 並用以下command line<br>
 將圖片的url做修改</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="err">&#39;</span><span class="sc">&#39; &#39;</span><span class="n">s</span><span class="o">/</span><span class="n">your_notebook_files</span><span class="err">\</span><span class="c1">//\/images\//g&#39; your_notebook.md
-</span></span></span></code></pre></div><h3 id="開幾本地server">開幾本地server</h3>
+</span></span></span></code></pre></div><p>另一個問題是 jupyter轉md下，dataframe的表現會跑掉<br>
+在每一個notebook中可能有多個dataframe<br>
+故得在notebook最上方執行以下的python code
+將每一個dataframe轉換成html
+就可以在轉成md後正常顯示了</p>
+<pre tabindex="0"><code>from IPython.display import HTML
+import pandas as pd
+
+def display_df_as_html(df):
+    &#34;&#34;&#34;Automatically display DataFrame as an HTML table.&#34;&#34;&#34;
+    display(HTML(df.to_html()))
+
+# Apply function to all DataFrame outputs
+pd.DataFrame._repr_html_ = display_df_as_html
+</code></pre><h3 id="開幾本地server">開幾本地server</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">hugo</span> <span class="n">server</span>
 </span></span></code></pre></div><p>先在本地測試預覽用的</p>
 <h3 id="打包成靜態網頁檔每次更新過blog內容後">打包成靜態網頁檔(每次更新過blog內容後)</h3>
@@ -182,7 +198,7 @@ git remote add origin https://github.com/username/my-hugo-site.git
 <pre tabindex="0"><code>git add .
 git commit -m &#34;Deploy Hugo site&#34;
 git branch -M main
-git push -f origin main
+git push origin main
 </code></pre><p><strong>Note</strong>
 若是網站有更新過後
 要回到root 並重跑</p>
