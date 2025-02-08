@@ -158,7 +158,7 @@
 </span></span></code></pre></div><p>有一個問題是 轉換後圖會被存在另一個folder中<br>
 假設你的jupyter file叫 test.ipynb 在轉換的output dir中還會有一個folder 叫 test_files.ipynb
 此時可以把你的圖片都丟到 static/images中
-並用以下command line</p>
+並用以下command line 將圖片的url做修改</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="err">&#39;</span><span class="sc">&#39; &#39;</span><span class="n">s</span><span class="o">/</span><span class="n">your_notebook_files</span><span class="err">\</span><span class="c1">//\/images\//g&#39; your_notebook.md
 </span></span></span></code></pre></div><h3 id="開幾本地server">開幾本地server</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">hugo</span> <span class="n">server</span>
