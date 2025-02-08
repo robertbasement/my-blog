@@ -2,16 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://robertbasement.github.io/my-blog/tags/c%23/</loc>
-    <lastmod>2025-02-07T23:59:14+08:00</lastmod>
-  </url><url>
-    <loc>https://robertbasement.github.io/my-blog/categories/c%23/</loc>
-    <lastmod>2025-02-07T23:59:14+08:00</lastmod>
-  </url><url>
     <loc>https://robertbasement.github.io/my-blog/categories/</loc>
     <lastmod>2025-02-07T23:59:14+08:00</lastmod>
   </url><url>
     <loc>https://robertbasement.github.io/my-blog/post/</loc>
+    <lastmod>2025-02-07T23:59:14+08:00</lastmod>
+  </url><url>
+    <loc>https://robertbasement.github.io/my-blog/tags/python/</loc>
+    <lastmod>2025-02-07T23:59:14+08:00</lastmod>
+  </url><url>
+    <loc>https://robertbasement.github.io/my-blog/categories/python/</loc>
     <lastmod>2025-02-07T23:59:14+08:00</lastmod>
   </url><url>
     <loc>https://robertbasement.github.io/my-blog/</loc>
@@ -20,10 +20,10 @@
     <loc>https://robertbasement.github.io/my-blog/tags/</loc>
     <lastmod>2025-02-07T23:59:14+08:00</lastmod>
   </url><url>
-    <loc>https://robertbasement.github.io/my-blog/posts/test/</loc>
+    <loc>https://robertbasement.github.io/my-blog/posts/post/%E8%B2%A1%E9%87%91%E9%87%8F%E5%8C%96/test.md/</loc>
     <lastmod>2025-02-07T23:59:14+08:00</lastmod>
   </url><url>
-    <loc>https://robertbasement.github.io/my-blog/posts/final_test2/</loc>
+    <loc>https://robertbasement.github.io/my-blog/posts/post/%E8%B2%A1%E9%87%91%E9%87%8F%E5%8C%96/final_test2.md/</loc>
     <lastmod>2025-02-07T23:02:53+08:00</lastmod>
   </url><url>
     <loc>https://robertbasement.github.io/my-blog/posts/post/2022/20220928_blog%E6%93%8D%E4%BD%9C%E6%89%8B%E5%86%8A.md/</loc>
@@ -49,12 +49,6 @@
   </url><url>
     <loc>https://robertbasement.github.io/my-blog/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://robertbasement.github.io/my-blog/posts/</loc>
-  </url><url>
-    <loc>https://robertbasement.github.io/my-blog/posts/</loc>
-  </url><url>
-    <loc>https://robertbasement.github.io/my-blog/posts/</loc>
   </url><url>
     <loc>https://robertbasement.github.io/my-blog/search/</loc>
   </url><url>
