@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='應用層的部分'><title>簡潔架構 Application Layer</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2021/20211217_%E7%B0%A1%E6%BD%94%E6%9E%B6%E6%A7%8Bapplication.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='簡潔架構 Application Layer'>
+<meta property='og:description' content='應用層的部分'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2021/20211217_%E7%B0%A1%E6%BD%94%E6%9E%B6%E6%A7%8Bapplication.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='Disign Principle' /><meta property='article:tag' content='Clean Architecture' /><meta property='article:tag' content='Micorservices' /><meta property='article:published_time' content='2021-12-17T11:44:52&#43;08:00'/><meta property='article:modified_time' content='2021-12-17T11:44:52&#43;08:00'/>
+<meta name="twitter:title" content="簡潔架構 Application Layer">
+<meta name="twitter:description" content="應用層的部分">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/disign-principle/" >
+                Disign Principle
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2021/20211217_%E7%B0%A1%E6%BD%94%E6%9E%B6%E6%A7%8Bapplication.md/">簡潔架構 Application Layer</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        應用層的部分
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 17, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="application-layer">Application Layer</h2></blockquote>
+<p>注重於商業需求而不是實作一些外部系統的東西，DB之類的。</p>
+<p>在這一層裡有三個主要的資料夾Contracts、Features、Behaviors，分別為存放服務介面、Use case、驗證用戶行為。</p>
+<p>主要在於Fetures，根據DDD並使用MediatR為每一個需求做獨自的CQRS操作，</p>
+<blockquote>
+<h3 id="contracts">Contracts</h3></blockquote>
+<p>存放各Services的interface的地方</p>
+<h4 id="persistence">Persistence</h4>
+<p>通用的非同步Repository介面(Asynchronous Generic Repository)</p>
+<p>裡面包含常用的功能。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//泛型T必需繼承Domina Layer的EntityBase(Id、createdBy、createDate、LastModifiedDate等等的東西)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IAsyncRepository</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">EntityBase</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">IReadOnlyList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">GetAllAsync</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">IReadOnlyList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">GetAsync</span><span class="p">(</span><span class="n">Expression</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;&gt;</span> <span class="n">predicate</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">IReadOnlyList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">GetAsync</span><span class="p">(</span><span class="n">Expression</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;&gt;</span> <span class="n">predicate</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="n">Func</span><span class="p">&lt;</span><span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="n">IOrderedQueryable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">orderBy</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="kt">string</span> <span class="n">includeString</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="kt">bool</span> <span class="n">disableTracking</span> <span class="p">=</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">IReadOnlyList</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">GetAsync</span><span class="p">(</span><span class="n">Expression</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">bool</span><span class="p">&gt;&gt;</span> <span class="n">predicate</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="n">Func</span><span class="p">&lt;</span><span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;,</span> <span class="n">IOrderedQueryable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;&gt;</span> <span class="n">orderBy</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="n">List</span><span class="p">&lt;</span><span class="n">Expression</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;&gt;&gt;</span> <span class="n">includes</span> <span class="p">=</span> <span class="kc">null</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                                    <span class="kt">bool</span> <span class="n">disableTracking</span> <span class="p">=</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">GetByIdAsync</span><span class="p">(</span><span class="kt">int</span> <span class="n">id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">AddAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">entity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span> <span class="n">UpdateAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">entity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span> <span class="n">DeleteAsync</span><span class="p">(</span><span class="n">T</span> <span class="n">entity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>下訂單Repository介面，在這邊我們可以建立自己的方法、功能，後面處理Request時會用到。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IOrderRepository</span> <span class="p">:</span> <span class="n">IAsyncRepository</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;</span><span class="c1">//Order來自Domian Layer的Entity</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;&gt;</span> <span class="n">GetOrdersByUserName</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="infrastructure">Infrastructure</h4>
+<p>Email發送服務介面，Email class建立在Models/Email.cs</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">interface</span> <span class="nc">IEmailService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Task</span><span class="p">&lt;</span><span class="kt">bool</span><span class="p">&gt;</span> <span class="n">SendEmail</span><span class="p">(</span><span class="n">Email</span> <span class="n">email</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h3 id="features">Features</h3></blockquote>
+<p>存放Use case，目前只有Orders一個Use case，並實作CQRS。</p>
+<p>建資料夾
+Features/Orders/Commands
+Features/Orders/Queries</p>
+<p>Queries只有一個方法，GetOrderList。</p>
+<p>Commands裡面有三個方法，CheckOrder、UpdateOrder、DeleteOrder。</p>
+<h4 id="queriesgetorderlist">Queries/GetOrderList</h4>
+<p>先處理Queries</p>
+<p>Features/Orders/Queries/GetOrdersList/GetOrdersListQuery.cs
+Features/Orders/Queries/GetOrdersList/GetOrdersListQueryHandler.cs
+Features/Orders/Queries/GetOrdersList/OrdersVm.cs</p>
+<p><strong>GetOrdersListQuery</strong>
+IRequest介面來自於MediatR DI Version，裡面<code>List&lt;OrdersVm&gt;</code>代表要回傳的type</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">MediatR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">GetOrdersListQuery</span> <span class="p">:</span> <span class="n">IRequest</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">OrdersVm</span><span class="p">&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">GetOrdersListQuery</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UserName</span> <span class="p">=</span> <span class="n">userName</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">userName</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>GetOrdersListQueryHandler</strong>
+當Query被觸發時Handler會負責處理，實作IRequestHandler會得到Handle這個Function，並寫入我們要進行的操作</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//IRequestHandler&lt;要處理的IRequest, 輸出的type&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">GetOrdersListQueryHandler</span> <span class="p">:</span> <span class="n">IRequestHandler</span><span class="p">&lt;</span><span class="n">GetOrdersListQuery</span><span class="p">,</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">OrdersVm</span><span class="p">&gt;&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IOrderRepository</span> <span class="n">_orderRepository</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IMapper</span> <span class="n">_mapper</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//使用在Contract裡面寫的orderRepository</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">GetOrdersListQueryHandler</span><span class="p">(</span><span class="n">IOrderRepository</span> <span class="n">orderRepository</span><span class="p">,</span> <span class="n">IMapper</span> <span class="n">mapper</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_orderRepository</span> <span class="p">=</span> <span class="n">orderRepository</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_mapper</span> <span class="p">=</span> <span class="n">mapper</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">OrdersVm</span><span class="p">&gt;&gt;</span> <span class="n">Handle</span><span class="p">(</span><span class="n">GetOrdersListQuery</span> <span class="n">request</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">orderList</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_orderRepository</span><span class="p">.</span><span class="n">GetOrdersByUserName</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">UserName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">OrdersVm</span><span class="p">&gt;&gt;(</span><span class="n">orderList</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p><strong>OrdersVm</strong>
+可以看到這個class是放在Queries/GetOrdersList裡面，只給GetOrdersList這個Use Case用，與Entity層的Order.cs無關，雖然他們長得一樣。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OrdersVm</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">TotalPrice</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// BillingAddress</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">EmailAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">AddressLine</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">State</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">ZipCode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Payment</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardNumber</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Expiration</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CVV</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">PaymentMethod</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="commandscheckoutorder">Commands/CheckoutOrder</h4>
+<p>接下來要處理Command的部分</p>
+<p>先處理CheckoutOrder</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//Features/Orders/Commands/CheckoutOrder/CheckoutOrderCommand.cs</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//回傳int訂單編號</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CheckoutOrderCommand</span> <span class="p">:</span> <span class="n">IRequest</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">TotalPrice</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// BillingAddress</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">EmailAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">AddressLine</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">State</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">ZipCode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Payment</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardNumber</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Expiration</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CVV</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">PaymentMethod</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>一樣使用MediatR的功能，透過handler來處理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//Features/Orders/Commands/CheckoutOrder/CheckoutOrderCommandHandler.cs</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CheckoutOrderCommandHandler</span> <span class="p">:</span> <span class="n">IRequestHandler</span><span class="p">&lt;</span><span class="n">CheckoutOrderCommand</span><span class="p">,</span> <span class="kt">int</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IOrderRepository</span> <span class="n">_orderRepository</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IMapper</span> <span class="n">_mapper</span><span class="p">;</span> <span class="c1">//Application層下的mappings</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IEmailService</span> <span class="n">_emailService</span><span class="p">;</span><span class="c1">//Application層下的contracts/infastucture</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">CheckoutOrderCommandHandler</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//依賴注入需要的元件</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CheckoutOrderCommandHandler</span><span class="p">(</span><span class="n">IOrderRepository</span> <span class="n">orderRepository</span><span class="p">,</span> <span class="n">IMapper</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">IEmailService</span> <span class="n">emailService</span><span class="p">,</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">CheckoutOrderCommandHandler</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_orderRepository</span> <span class="p">=</span> <span class="n">orderRepository</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">orderRepository</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_mapper</span> <span class="p">=</span> <span class="n">mapper</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">mapper</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_emailService</span> <span class="p">=</span> <span class="n">emailService</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">emailService</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">logger</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//實作IRequestHandler</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="kt">int</span><span class="p">&gt;</span> <span class="n">Handle</span><span class="p">(</span><span class="n">CheckoutOrderCommand</span> <span class="n">request</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">orderEntity</span> <span class="p">=</span> <span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">Order</span><span class="p">&gt;(</span><span class="n">request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">newOrder</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_orderRepository</span><span class="p">.</span><span class="n">AddAsync</span><span class="p">(</span><span class="n">orderEntity</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">$&#34;訂單{newOrder.Id}建立成功&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">await</span> <span class="n">SendMail</span><span class="p">(</span><span class="n">newOrder</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">newOrder</span><span class="p">.</span><span class="n">Id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">SendMail</span><span class="p">(</span><span class="n">Order</span> <span class="n">order</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">email</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Email</span><span class="p">()</span> <span class="p">{</span> <span class="n">To</span> <span class="p">=</span> <span class="s">&#34;test@gmail.com&#34;</span><span class="p">,</span> <span class="n">Body</span> <span class="p">=</span> <span class="s">$&#34;Order was created.&#34;</span><span class="p">,</span> <span class="n">Subject</span> <span class="p">=</span> <span class="s">&#34;Order was created&#34;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">        <span class="k">try</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">await</span> <span class="n">_emailService</span><span class="p">.</span><span class="n">SendEmail</span><span class="p">(</span><span class="n">email</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">catch</span> <span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_logger</span><span class="p">.</span><span class="n">LogError</span><span class="p">(</span><span class="s">$&#34;訂單{order.Id}發生錯誤，mail service: {ex.Message}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>最後會加上一個驗證，在Behaviors那邊加入。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">FluentValidation</span><span class="p">;</span><span class="c1">//使用驗證套件</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">CheckoutOrderCommandValidator</span> <span class="p">:</span> <span class="n">AbstractValidator</span><span class="p">&lt;</span><span class="n">CheckoutOrderCommand</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">CheckoutOrderCommandValidator</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//p代表property</span>
+</span></span><span class="line"><span class="cl">        <span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">UserName</span><span class="p">)</span><span class="c1">//驗證UserName   </span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">NotEmpty</span><span class="p">().</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&#34;UserName 必填&#34;</span><span class="p">)</span><span class="c1">//不可為空值，若為空值回傳訊息</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">NotNull</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">MaximumLength</span><span class="p">(</span><span class="m">50</span><span class="p">).</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&#34;UserName 字數過長&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">EmailAddress</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">NotEmpty</span><span class="p">().</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&#34;EmailAddress 必填&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">RuleFor</span><span class="p">(</span><span class="n">p</span> <span class="p">=&gt;</span> <span class="n">p</span><span class="p">.</span><span class="n">TotalPrice</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">NotEmpty</span><span class="p">().</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&#34;TotalPrice 必填&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">GreaterThan</span><span class="p">(</span><span class="m">0</span><span class="p">).</span><span class="n">WithMessage</span><span class="p">(</span><span class="s">&#34;TotalPrice 需要大於0&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><h4 id="commandsdeleteorder">Commands/DeleteOrder</h4>
+<p>UpdateOrder、DeleteOrder基本與CheckoutOrder類似，不過有幾個地方不太一樣。</p>
+<p>Command只需要IRequest，不需用泛型。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">DeleteOrderCommand</span> <span class="p">:</span> <span class="n">IRequest</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>如果Command本身沒有要回傳值的話，就回傳Unit.Value給MediatR知道</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">Unit</span><span class="p">&gt;</span> <span class="n">Handle</span><span class="p">(</span><span class="n">DeleteOrderCommand</span> <span class="n">request</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">orderToDelete</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_orderRepository</span><span class="p">.</span><span class="n">GetByIdAsync</span><span class="p">(</span><span class="n">request</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">orderToDelete</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">throw</span> <span class="k">new</span> <span class="n">Exception</span><span class="p">(</span><span class="s">$&#34;找不到訂單{request.Id}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">_orderRepository</span><span class="p">.</span><span class="n">DeleteAsync</span><span class="p">(</span><span class="n">orderToDelete</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">$&#34;訂單{request.Id}刪除完成&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Unit</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span><span class="c1">//如果Command本身沒有要回傳值的話，就回傳Unit.Value給MediatR知道</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h3 id="behaviors">Behaviors</h3></blockquote>
+<p>我們會在Handler前後進行驗證User使用的行為(輸入)是否正常</p>
+<p>整個流程大概如下</p>
+<p>Caller &raquo; Request &raquo; 前處理 &raquo; Handler &raquo; 後處理</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//實作MediatR提供的IPipelineBehavior來註冊前、後處理</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">ValidationBehaviour</span><span class="p">&lt;</span><span class="n">TRequest</span><span class="p">,</span> <span class="n">TResponse</span><span class="p">&gt;</span> <span class="p">:</span> <span class="n">IPipelineBehavior</span><span class="p">&lt;</span><span class="n">TRequest</span><span class="p">,</span> <span class="n">TResponse</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//這將會讀取所有Validator，只要有繼承AbstractValidator&lt;TRequest&gt;(來自FluentValidation)</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IValidator</span><span class="p">&lt;</span><span class="n">TRequest</span><span class="p">&gt;&gt;</span> <span class="n">_validators</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">ValidationBehaviour</span><span class="p">(</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">IValidator</span><span class="p">&lt;</span><span class="n">TRequest</span><span class="p">&gt;&gt;</span> <span class="n">validators</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_validators</span> <span class="p">=</span> <span class="n">validators</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">TResponse</span><span class="p">&gt;</span> <span class="n">Handle</span><span class="p">(</span><span class="n">TRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">CancellationToken</span> <span class="n">cancellationToken</span><span class="p">,</span> <span class="n">RequestHandlerDelegate</span><span class="p">&lt;</span><span class="n">TResponse</span><span class="p">&gt;</span> <span class="n">next</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">_validators</span><span class="p">.</span><span class="n">Any</span><span class="p">())</span><span class="c1">//如果有Validator的話</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//驗證輸入</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">context</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ValidationContext</span><span class="p">&lt;</span><span class="n">TRequest</span><span class="p">&gt;(</span><span class="n">request</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//等待所有非同步執行結果 ( 對所有驗證項目進行非同步工作  )</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">validationResults</span> <span class="p">=</span> <span class="k">await</span> <span class="n">Task</span><span class="p">.</span><span class="n">WhenAll</span><span class="p">(</span><span class="n">_validators</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">v</span> <span class="p">=&gt;</span> <span class="n">v</span><span class="p">.</span><span class="n">ValidateAsync</span><span class="p">(</span><span class="n">context</span><span class="p">,</span> <span class="n">cancellationToken</span><span class="p">)));</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//查看結果</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">var</span> <span class="n">failures</span> <span class="p">=</span> <span class="n">validationResults</span><span class="p">.</span><span class="n">SelectMany</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Errors</span><span class="p">).</span><span class="n">Where</span><span class="p">(</span><span class="n">f</span> <span class="p">=&gt;</span> <span class="n">f</span> <span class="p">!=</span> <span class="kc">null</span><span class="p">).</span><span class="n">ToList</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//如果有錯的話</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">failures</span><span class="p">.</span><span class="n">Count</span> <span class="p">!=</span> <span class="m">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">throw</span> <span class="k">new</span> <span class="n">ValidationException</span><span class="p">(</span><span class="n">failures</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//前處理的部份到此結束</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">next</span><span class="p">();</span><span class="c1">//Handler處理完回傳</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//後處理的部分從此開始</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//....</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//後處理結束</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">response</span><span class="p">;</span><span class="c1">//回傳回應結果</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h3 id="di-service-collection">DI Service Collection</h3></blockquote>
+<p>因為使用的服務有點多，把他們集中管理成一個Service Collection，之後直接註冊這個Collection就好了。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="k">class</span> <span class="nc">ApplicationServiceRegistration</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">static</span> <span class="n">IServiceCollection</span> <span class="n">AddApplicationServices</span><span class="p">(</span><span class="k">this</span> <span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddAutoMapper</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetExecutingAssembly</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddValidatorsFromAssembly</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetExecutingAssembly</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddMediatR</span><span class="p">(</span><span class="n">Assembly</span><span class="p">.</span><span class="n">GetExecutingAssembly</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddTransient</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IPipelineBehavior</span><span class="p">&lt;,&gt;),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">UnhandledExceptionBehaviour</span><span class="p">&lt;,&gt;));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddTransient</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">IPipelineBehavior</span><span class="p">&lt;,&gt;),</span> <span class="k">typeof</span><span class="p">(</span><span class="n">ValidationBehaviour</span><span class="p">&lt;,&gt;));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">services</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>到這邊Application Layer就到一段落了，實在很多很長，主要實作了CQRS與學習MediatR的操作，也更看清楚整個簡潔架構的設計。</p>
+<blockquote>
+<h2 id="參考">參考</h2></blockquote>
+<p><a class="link" href="/posts/post/20211217_%e7%b0%a1%e6%bd%94%e6%9e%b6%e6%a7%8bapplication.md/" >簡潔架構 Application Layer</a></p>
+<p><a class="link" href="/posts/post/20211222_%e7%b0%a1%e6%bd%94%e6%9e%b6%e6%a7%8bInfrastructure.md/" >簡潔架構 Infrastructure Layer</a></p>
+<p><a class="link" href="https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/"  target="_blank" rel="noopener"
+    >https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/disign-principle/">Disign Principle</a>
+        
+            <a href="/my-blog/tags/clean-architecture/">Clean Architecture</a>
+        
+            <a href="/my-blog/tags/micorservices/">Micorservices</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/20211222_%E7%B0%A1%E6%BD%94%E6%9E%B6%E6%A7%8Binfrastructure.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">簡潔架構 Infrastructure Layer</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/2021202_%E7%B0%A1%E6%BD%94%E6%9E%B6%E6%A7%8Bdomain.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">簡潔架構 Domain Layer</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/2021201_cqrs.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">CQRS</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/2021130_ddd.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Domain Driven Design 領域驅動設計</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/2021129_solid%E5%8E%9F%E5%89%87.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">SOLID、SoC</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#application-layer">Application Layer</a>
+      <ol>
+        <li><a href="#contracts">Contracts</a>
+          <ol>
+            <li><a href="#persistence">Persistence</a></li>
+            <li><a href="#infrastructure">Infrastructure</a></li>
+          </ol>
+        </li>
+        <li><a href="#features">Features</a>
+          <ol>
+            <li><a href="#queriesgetorderlist">Queries/GetOrderList</a></li>
+            <li><a href="#commandscheckoutorder">Commands/CheckoutOrder</a></li>
+            <li><a href="#commandsdeleteorder">Commands/DeleteOrder</a></li>
+          </ol>
+        </li>
+        <li><a href="#behaviors">Behaviors</a></li>
+        <li><a href="#di-service-collection">DI Service Collection</a></li>
+      </ol>
+    </li>
+    <li><a href="#參考">參考</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

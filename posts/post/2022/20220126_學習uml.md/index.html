@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='看圖說故事'><title>學習UML</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2022/20220126_%E5%AD%B8%E7%BF%92uml.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='學習UML'>
+<meta property='og:description' content='看圖說故事'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2022/20220126_%E5%AD%B8%E7%BF%92uml.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='UML' /><meta property='article:published_time' content='2022-01-26T13:31:49&#43;08:00'/><meta property='article:modified_time' content='2022-01-26T13:31:49&#43;08:00'/>
+<meta name="twitter:title" content="學習UML">
+<meta name="twitter:description" content="看圖說故事">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/uml/" >
+                UML
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2022/20220126_%E5%AD%B8%E7%BF%92uml.md/">學習UML</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        看圖說故事
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 26, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    1 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="筆記">筆記</h2></blockquote>
+<p>老闆最近希望讓我去開發與設計一個管理公司內部合約與公文的檔管系統</p>
+<p>以前在學校學習的已經還給老師啦XD</p>
+<p>趁這個機會複習一下</p>
+<p>一個系統開發不只包含了coding也同時有設計、品管、預算、測試、寫文件、上線與維護</p>
+<p>常用的開發流程分為Waterfall與Agile</p>
+<blockquote>
+<h2 id="waterfall">Waterfall</h2></blockquote>
+<p>Waterfall最適合幾乎確定需求且開發中不會有太多變動</p>
+<p>主要可以分為五個步驟</p>
+<ol>
+<li>收集與分析需求</li>
+<li>決定系統架構</li>
+<li>實作</li>
+<li>驗證</li>
+<li>維護</li>
+</ol>
+<hr>
+<h3 id="收集與分析需求">收集與分析需求</h3>
+<p>與利益相關者保持距離並徹底紀錄需求</p>
+<p>下面已建立note app為例</p>
+<p>可以使用“必須”來條列式需求</p>
+<ul>
+<li>
+<p>功能需求：</p>
+<ul>
+<li>APP必須可以記錄文字，也可以插入圖片或手寫塗鴉。</li>
+<li>部分筆記內容必須設定密碼，避免被別人看見。</li>
+<li>筆記內容必須可以自動同步到雲端硬碟上。</li>
+</ul>
+</li>
+<li>
+<p>非功能性需求：</p>
+<ul>
+<li>必須支援ios10或更新版</li>
+<li>必須減少不必要的資料傳輸，以降低伺服器的負擔</li>
+</ul>
+</li>
+</ul>
+<p>從功能需求我們可以分析出三個情境(epic)</p>
+<ol>
+<li>筆記的建立與編輯</li>
+<li>隱私問題</li>
+<li>雲端同步</li>
+</ol>
+<ul>
+<li>
+<p>情境1：筆記建立與編輯</p>
+<ul>
+<li>身為一個user，我要可以快速記下筆記。</li>
+<li>身為一個user，我要能把圖片以附件的方式附上，避免影響到筆記的排版。</li>
+<li>身為一個user，我要有手寫功能，讓我的筆記更有溫度。</li>
+</ul>
+</li>
+<li>
+<p>情境2：隱私</p>
+<ul>
+<li>身為一個user，我要建立隱私筆記，只有我能存取它。</li>
+<li>身為一個user，我要用密碼保護我的隱私筆記。</li>
+</ul>
+</li>
+<li>
+<p>情境3：雲端同步</p>
+<ul>
+<li>身為一個user，我要打開app時，資料就已經同步成最新版。</li>
+<li>身為一個user，我要能夠自動同步到雲端硬碟上，隨時備份不怕資料不見。</li>
+</ul>
+</li>
+</ul>
+<p>依照情境畫出Use Cases圖</p>
+<p><figure 
+	>
+	<a href="/my-blog/images/20220127_UseCases1.png" >
+		<img src="/my-blog/images/20220127_UseCases1.png"
+			
+			
+			
+			loading="lazy"
+			alt="筆記建立與編輯">
+	</a>
+	
+	<figcaption>筆記建立與編輯</figcaption>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/my-blog/images/20220127_UseCases2.png" >
+		<img src="/my-blog/images/20220127_UseCases2.png"
+			
+			
+			
+			loading="lazy"
+			alt="隱私">
+	</a>
+	
+	<figcaption>隱私</figcaption>
+	
+</figure></p>
+<p><figure 
+	>
+	<a href="/my-blog/images/20220127_UseCases3.png" >
+		<img src="/my-blog/images/20220127_UseCases3.png"
+			
+			
+			
+			loading="lazy"
+			alt="雲端同步">
+	</a>
+	
+	<figcaption>雲端同步</figcaption>
+	
+</figure></p>
+<p>畫出class之間的關聯圖</p>
+<p>畫出流程圖</p>
+<hr>
+<h3 id="決定系統架構">決定系統架構</h3>
+<p>這個步驟就像是建築的藍圖一樣，設計必須清晰明瞭</p>
+<ul>
+<li>要用什麼package/components？</li>
+<li>每個component的type是什麼？</li>
+<li>這些type怎麼互動或達成功能所需</li>
+<li>我們的系統安全嗎？</li>
+<li>效能如何？</li>
+<li>如何處理錯誤？</li>
+<li>我們的系統穩固嗎？</li>
+<li>之後會不會擴展？</li>
+<li>使用哪些第三方套件？</li>
+</ul>
+<hr>
+<h3 id="實作測試">實作＆測試</h3>
+<p>就是實作，發與測試，平常在做的。</p>
+<p>交給User測試功能性、安全性、效能、實用性</p>
+<p>這兩個步驟會一直重複到沒有bug</p>
+<hr>
+<h3 id="維護">維護</h3>
+<p>在這個階段就是抓抓小蟲</p>
+<p>小幅度強化功能</p>
+<blockquote>
+<h2 id="agile">Agile</h2></blockquote>
+<p>敏捷開發是為了因應需求一直變動，沒辦法再開發之前就知道最終的產品會是長什麼樣子，透過不斷重複的週期(Sprint)循環，每次都一點點收集分析資料、設計、實作、測試，每一個循環就像小瀑布一樣。</p>
+<p>常聽到的Scrum就是一種實作Agile的方式</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/uml/">UML</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#筆記">筆記</a></li>
+    <li><a href="#waterfall">Waterfall</a>
+      <ol>
+        <li><a href="#收集與分析需求">收集與分析需求</a></li>
+        <li><a href="#決定系統架構">決定系統架構</a></li>
+        <li><a href="#實作測試">實作＆測試</a></li>
+        <li><a href="#維護">維護</a></li>
+      </ol>
+    </li>
+    <li><a href="#agile">Agile</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

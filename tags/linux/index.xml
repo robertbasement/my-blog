@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Linux on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/linux/</link>
+    <description>Recent content in Linux on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Jan 2023 15:43:55 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/linux/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Linux簡易指令</title>
+      <link>https://robertbasement.github.io/my-blog/posts/post/2023/20230120_linux%E7%B0%A1%E6%98%93%E6%8C%87%E4%BB%A4.md/</link>
+      <pubDate>Fri, 20 Jan 2023 15:43:55 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/posts/post/2023/20230120_linux%E7%B0%A1%E6%98%93%E6%8C%87%E4%BB%A4.md/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;筆記&#34;&gt;筆記&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;h3 id=&#34;pwd&#34;&gt;pwd&lt;/h3&gt;&#xA;&lt;p&gt;當前資料夾&lt;/p&gt;&#xA;&lt;h3 id=&#34;ls&#34;&gt;ls&lt;/h3&gt;&#xA;&lt;p&gt;當前目錄下的資料&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;-l&lt;/code&gt; 長格式&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;-lh&lt;/code&gt; 長格式，人類閱讀&lt;/p&gt;&#xA;&lt;h3 id=&#34;cd&#34;&gt;cd&lt;/h3&gt;&#xA;&lt;p&gt;切換資料夾 &lt;code&gt;cd folder/file&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;man&#34;&gt;man&lt;/h3&gt;&#xA;&lt;p&gt;查看使用說明 &lt;code&gt;man ls&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;touch&#34;&gt;touch&lt;/h3&gt;&#xA;&lt;p&gt;建立新檔案 &lt;code&gt;touch file&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;rm&#34;&gt;rm&lt;/h3&gt;&#xA;&lt;p&gt;刪除檔案 &lt;code&gt;rm file&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;刪除資料夾&lt;code&gt;rm -rf folder&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;cp&#34;&gt;cp&lt;/h3&gt;&#xA;&lt;p&gt;複製檔案 &lt;code&gt;cp pic.png picCopy.png&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;pic.png複製目標&lt;/p&gt;&#xA;&lt;p&gt;picCopy.png複製出來的檔案&lt;/p&gt;&#xA;&lt;p&gt;&lt;code&gt;cp -R&lt;/code&gt;複製整個目錄&lt;/p&gt;&#xA;&lt;h3 id=&#34;mv&#34;&gt;mv&lt;/h3&gt;&#xA;&lt;p&gt;移動檔案至資料夾下&lt;code&gt;mv file folder&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;將檔案移至當前目錄&lt;code&gt;mv folder/file .&lt;/code&gt;&lt;/p&gt;&#xA;&lt;p&gt;將檔案改名&lt;code&gt;mv file01 file02&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;mkdir&#34;&gt;mkdir&lt;/h3&gt;&#xA;&lt;p&gt;建立資料夾&lt;code&gt;mkdir newFolder&lt;/code&gt;&lt;/p&gt;&#xA;&lt;h3 id=&#34;cat&#34;&gt;cat&lt;/h3&gt;&#xA;&lt;p&gt;查看檔案&lt;code&gt;cat test.txt&lt;/code&gt;&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;參考&#34;&gt;參考&lt;/h2&gt;&lt;/blockquote&gt;</description>
+    </item>
+  </channel>
+</rss>

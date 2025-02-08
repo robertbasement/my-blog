@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Network on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/network/</link>
+    <description>Recent content in Network on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 Dec 2021 13:22:15 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/network/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>換憑證</title>
+      <link>https://robertbasement.github.io/my-blog/posts/post/2021/20211221_%E6%8F%9B%E6%86%91%E8%AD%89.md/</link>
+      <pubDate>Tue, 21 Dec 2021 13:22:15 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/posts/post/2021/20211221_%E6%8F%9B%E6%86%91%E8%AD%89.md/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;憑證&#34;&gt;憑證&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;主要的功能是確認公鑰擁有者的身份，避免我們拿到冒用者的公鑰。&lt;/p&gt;&#xA;&lt;p&gt;要怎麼確定呢？找大家都信任的公正的第三方來，就是數位憑證認證機構(Certificate Authority，CA)。&lt;/p&gt;&#xA;&lt;p&gt;要取得憑證，應先向CA提出申請，CA判明申請者的身分後，為之分配一個公鑰，並將該公鑰與其身分資訊繫結，為該整體簽名，簽名後的整體即為憑證，發還給申請者。&lt;/p&gt;&#xA;&lt;p&gt;在公司用的通常是萬用憑證，連同子網域都可以用的憑證&lt;code&gt;*.google.com&lt;/code&gt;，blog.google.com、mail.google.com等，都可以直接使用相同的憑證。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;溝通流程&#34;&gt;溝通流程&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;用戶 - - - - - - HTTPS 伺服器您好，我支援TLS XX版本 - - - - - &amp;raquo; 伺服器&lt;/p&gt;&#xA;&lt;p&gt;用戶 &amp;laquo; - - - - - - - Hi 這是我的憑證 - - - - - - - - - - - -  伺服器&lt;/p&gt;&#xA;&lt;p&gt;用戶  確認憑證沒有問題&amp;hellip;(用CA的公鑰對那個憑證上的簽字進行驗證)&lt;/p&gt;&#xA;&lt;p&gt;確認不是中間人後，就可以進行金鑰交換的步驟了，並經過各種演算法讓你可以直接傳資料，且不用擔心被竊聽。&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;參考&#34;&gt;參考&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://zh.wikipedia.org/wiki/%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xD;&#xA;    &gt;https://zh.wikipedia.org/wiki/%E8%AF%81%E4%B9%A6%E9%A2%81%E5%8F%91%E6%9C%BA%E6%9E%84&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=63tKc67T2jM&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xD;&#xA;    &gt;https://www.youtube.com/watch?v=63tKc67T2jM&lt;/a&gt;&lt;/p&gt;&#xA;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://medium.com/@clu1022/%E9%82%A3%E4%BA%9B%E9%97%9C%E6%96%BCssl-tls%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B-%E4%B9%9D-ssl-communication-31a2a8a888a6&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xD;&#xA;    &gt;https://medium.com/@clu1022/%E9%82%A3%E4%BA%9B%E9%97%9C%E6%96%BCssl-tls%E7%9A%84%E4%BA%8C%E4%B8%89%E4%BA%8B-%E4%B9%9D-ssl-communication-31a2a8a888a6&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

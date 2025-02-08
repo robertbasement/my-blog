@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Shell on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/shell/</link>
+    <description>Recent content in Shell on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 23 Dec 2021 09:46:07 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/shell/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>nslookup查詢ip位置</title>
+      <link>https://robertbasement.github.io/my-blog/posts/post/2021/20211223_nslookup%E6%9F%A5%E8%A9%A2ip%E4%BD%8D%E7%BD%AE.md/</link>
+      <pubDate>Thu, 23 Dec 2021 09:46:07 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/posts/post/2021/20211223_nslookup%E6%9F%A5%E8%A9%A2ip%E4%BD%8D%E7%BD%AE.md/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;nslookup&#34;&gt;nslookup&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;紀錄一下今天學到的指令，想要查詢網站或是資料庫的ip位置，就可以使用nslookup來查詢，在windows、mac也都可以用。&lt;/p&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;MacBook-Air ~ % nslookup www.google.com&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Server:&#x9;&#x9;172.20.10.1&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Address:&#x9;172.20.10.1#53&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Non-authoritative answer:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Name:&#x9;www.google.com&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Address: 142.251.42.228&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;前面是DNS的位置&lt;/p&gt;&#xA;&lt;p&gt;Non-authoritative answer則是代表直接讀取DNS暫存，未認證的答案。&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

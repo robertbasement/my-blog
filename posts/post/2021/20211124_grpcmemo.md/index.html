@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Google remote procedure call'><title>Grpc 筆記</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2021/20211124_grpcmemo.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='Grpc 筆記'>
+<meta property='og:description' content='Google remote procedure call'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2021/20211124_grpcmemo.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C#' /><meta property='article:tag' content='Grpc' /><meta property='article:tag' content='Micorservices' /><meta property='article:published_time' content='2021-11-24T10:12:35&#43;08:00'/><meta property='article:modified_time' content='2021-11-24T10:12:35&#43;08:00'/>
+<meta name="twitter:title" content="Grpc 筆記">
+<meta name="twitter:description" content="Google remote procedure call">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/c%23/" >
+                C#
+            </a>
+        
+            <a href="/my-blog/categories/micorservices/" >
+                Micorservices
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2021/20211124_grpcmemo.md/">Grpc 筆記</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        Google remote procedure call
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Nov 24, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="筆記">筆記</h2></blockquote>
+<p>Grpc是google開發的rpc(Remote Procedure Call)框架，用於電腦與電腦之間的溝通，就像電腦A呼叫電腦B做事情，電腦B做好事情後把結果回傳給電腦A，與一般的api不同的地方在於，電腦A、B在進行Grpc溝通前，都必須有protocal buffers檔案來把格式與方法定義清楚，並使用HTTP/2進行傳輸，快速、低延遲、支持串流。</p>
+<blockquote>
+<h2 id="protocal-buffers-檔案">protocal buffers 檔案</h2></blockquote>
+<p>在VS裡面，Add &raquo; New Project &raquo; 選gRPC Service &raquo; &hellip;一些基本設定</p>
+<p>生成新gRPC Service後，裡面會有.proto檔案</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="n">syntax</span> <span class="p">=</span> <span class="s">&#34;proto3&#34;</span><span class="p">;</span><span class="c1">//使用的protocal buffers版本</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">option</span> <span class="n">csharp_namespace</span> <span class="p">=</span> <span class="s">&#34;MyFirstGrpc.Grpc&#34;</span><span class="p">;</span><span class="c1">//命名空間</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">package</span> <span class="n">greeter</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定義交換資料的格式</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="n">HelloRequest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">name</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定義交換資料的格式</span>
+</span></span><span class="line"><span class="cl"><span class="n">message</span> <span class="n">HelloReply</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">string</span> <span class="n">message</span> <span class="p">=</span> <span class="m">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 定義呼叫api的方法</span>
+</span></span><span class="line"><span class="cl"><span class="n">service</span> <span class="n">Greeter</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// SayHello方法需要輸入參數(HelloRequest格式) 會回傳(HelloReply格式)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">rpc</span> <span class="n">SayHello</span> <span class="p">(</span><span class="n">HelloRequest</span><span class="p">)</span> <span class="n">returns</span> <span class="p">(</span><span class="n">HelloReply</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="appsettings-使用http2">AppSettings 使用Http2</h2></blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Logging&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;LogLevel&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Default&#34;</span><span class="p">:</span> <span class="s2">&#34;Information&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Microsoft&#34;</span><span class="p">:</span> <span class="s2">&#34;Warning&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Microsoft.Hosting.Lifetime&#34;</span><span class="p">:</span> <span class="s2">&#34;Information&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;AllowedHosts&#34;</span><span class="p">:</span> <span class="s2">&#34;*&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Kestrel&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;EndpointDefaults&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;Protocols&#34;</span><span class="p">:</span> <span class="s2">&#34;Http2&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>我們可以看到在AppSettings裡Protocols是採用Http2</p>
+<blockquote>
+<h2 id="產生service-class檔案">產生Service class檔案</h2></blockquote>
+<p>如果設定都沒有錯的話，會在MyFirstGrpc.Grpc/obj/Debug/net5.0/Protos產生Greet.cs與GreetGrpc.cs</p>
+<p>若資料夾內沒有產生cs檔，很有可能是專案檔MyFirstGrpc.Grpc.csproj裡面設定有問題。</p>
+<p>確保有<code>&lt;Protobuf Include=&quot;Protos\greet.proto&quot; GrpcServices=&quot;Server&quot; /&gt;</code>對.proto做編譯</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//參考的.csproj</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;?</span><span class="n">xml</span> <span class="n">version</span><span class="p">=</span><span class="s">&#34;1.0&#34;</span> <span class="n">encoding</span><span class="p">=</span><span class="s">&#34;UTF-8&#34;</span><span class="p">?&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">Project</span> <span class="n">Sdk</span><span class="p">=</span><span class="s">&#34;Microsoft.NET.Sdk.Web&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="n">PropertyGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="n">TargetFramework</span><span class="p">&gt;</span><span class="n">net5</span><span class="p">.</span><span class="m">0</span><span class="p">&lt;/</span><span class="n">TargetFramework</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="n">PropertyGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="n">None</span> <span class="n">Remove</span><span class="p">=</span><span class="s">&#34;Protos\greeter.proto&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="n">PackageReference</span> <span class="n">Include</span><span class="p">=</span><span class="s">&#34;Grpc.AspNetCore&#34;</span> <span class="n">Version</span><span class="p">=</span><span class="s">&#34;2.32.0&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">		<span class="p">&lt;</span><span class="n">Protobuf</span> <span class="n">Include</span><span class="p">=</span><span class="s">&#34;Protos\greeter.proto&#34;</span> <span class="n">GrpcServices</span><span class="p">=</span><span class="s">&#34;Server&#34;</span> <span class="p">/&gt;</span>
+</span></span><span class="line"><span class="cl">	<span class="p">&lt;/</span><span class="n">ItemGroup</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="n">Project</span><span class="p">&gt;</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="greeterservice-實作">GreeterService 實作</h2></blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">namespace</span> <span class="nn">MyFirstGrpc.Grpc</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">class</span> <span class="nc">GreeterService</span> <span class="p">:</span> <span class="n">Greeter</span><span class="p">.</span><span class="n">GreeterBase</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">GreeterService</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="n">GreeterService</span><span class="p">(</span><span class="n">ILogger</span><span class="p">&lt;</span><span class="n">GreeterService</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kd">public</span> <span class="kd">override</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">HelloReply</span><span class="p">&gt;</span> <span class="n">SayHello</span><span class="p">(</span><span class="n">HelloRequest</span> <span class="n">request</span><span class="p">,</span> <span class="n">ServerCallContext</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span> <span class="n">Task</span><span class="p">.</span><span class="n">FromResult</span><span class="p">(</span><span class="k">new</span> <span class="n">HelloReply</span> <span class="p">{</span> <span class="n">Message</span> <span class="p">=</span> <span class="s">$&#34;Hello {request.Name}&#34;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在Services/GreeterService.cs下</p>
+<p>繼承自動產生的Greeter下的GreeterBase並將其覆寫，最主要的邏輯也是寫在這邊。</p>
+<p>SayHello方法需要輸入參數(HelloRequest格式) 會回傳(HelloReply格式)</p>
+<p>Tip:輸入override按下空白，VS會自動把可以override的class顯示出來。</p>
+<blockquote>
+<h2 id="註冊grpc服務">註冊Grpc服務</h2></blockquote>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">Startup</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">services</span><span class="p">.</span><span class="n">AddGrpc</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="k">void</span> <span class="n">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">IWebHostEnvironment</span> <span class="n">env</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">env</span><span class="p">.</span><span class="n">IsDevelopment</span><span class="p">())</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">app</span><span class="p">.</span><span class="n">UseDeveloperExceptionPage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">app</span><span class="p">.</span><span class="n">UseRouting</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">app</span><span class="p">.</span><span class="n">UseEndpoints</span><span class="p">(</span><span class="n">endpoints</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">endpoints</span><span class="p">.</span><span class="n">MapGrpcService</span><span class="p">&lt;</span><span class="n">GreeterService</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">endpoints</span><span class="p">.</span><span class="n">MapGet</span><span class="p">(</span><span class="s">&#34;/&#34;</span><span class="p">,</span> <span class="kd">async</span> <span class="n">context</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">await</span> <span class="n">context</span><span class="p">.</span><span class="n">Response</span><span class="p">.</span><span class="n">WriteAsync</span><span class="p">(</span><span class="s">&#34;Communication with gRPC endpoints must be made through a gRPC client. To learn how to create a client, visit: https://go.microsoft.com/fwlink/?linkid=2086909&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="p">});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在startup.cs下
+透過<code>services.AddGrpc();</code>註冊Grpc服務，方可使用Grpc。
+透過<code>endpoints.MapGrpcService&lt;GreeterService&gt;();</code>把所有Grpc服務部署到Routing Pipeline裡</p>
+<blockquote>
+<h2 id="新增grpc服務的reference">新增Grpc服務的reference</h2></blockquote>
+<p>購物車的功能需要導入折價券.Grpc的服務</p>
+<p>購物車是Client端</p>
+<p>折價券是Server端</p>
+<p>VS for Mac在專案下面就可以直接看到Connected Services
+Windows則是右鍵 &raquo; Add &raquo; connected services</p>
+<p>選取購物車專案的connected services &raquo; Add new Grpc service reference &raquo; Add &raquo; 參照折價券.Grpc裡面的.proto &raquo; 選擇Client模式</p>
+<p>執行完後，可以看到.csproj多了Grpc服務、專案下也多了protos</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c#" data-lang="c#"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="n">Protobuf</span> <span class="n">Include</span><span class="p">=</span><span class="s">&#34;..\..\Discount\Discount.Grpc\Discount.Grpc\Protos\discount.proto&#34;</span> <span class="n">GrpcServices</span><span class="p">=</span><span class="s">&#34;Client&#34;</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="n">OutputDir</span><span class="p">&gt;</span><span class="n">obj</span><span class="err">\</span><span class="n">Debug</span><span class="err">\</span><span class="n">net5</span><span class="p">.</span><span class="m">0</span><span class="err">\</span><span class="p">&lt;/</span><span class="n">OutputDir</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">&lt;</span><span class="n">Link</span><span class="p">&gt;</span><span class="n">Protos</span><span class="err">\</span><span class="n">discount</span><span class="p">.</span><span class="n">proto</span><span class="p">&lt;/</span><span class="n">Link</span><span class="p">&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="n">Protobuf</span><span class="p">&gt;</span>
+</span></span></code></pre></div><p>建置專案後，也會產生ProtoServiceClient等cs檔</p>
+<blockquote>
+<h2 id="參考">參考</h2></blockquote>
+<p><a class="link" href="https://pjchender.dev/golang/grpc-getting-started/"  target="_blank" rel="noopener"
+    >https://pjchender.dev/golang/grpc-getting-started/</a></p>
+<p><a class="link" href="https://docs.microsoft.com/en-us/aspnet/core/grpc/aspnetcore?view=aspnetcore-6.0&amp;tabs=visual-studio"  target="_blank" rel="noopener"
+    >https://docs.microsoft.com/en-us/aspnet/core/grpc/aspnetcore?view=aspnetcore-6.0&tabs=visual-studio</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/c%23/">C#</a>
+        
+            <a href="/my-blog/tags/grpc/">Grpc</a>
+        
+            <a href="/my-blog/tags/micorservices/">Micorservices</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/test/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">測試df table</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/final_test2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Final_test2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220629_%E5%8F%8D%E5%B0%84%E6%96%B9%E6%B3%95%E7%B4%80%E9%8C%84.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C#反射方法紀錄</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220114_apigateway%E7%AD%86%E8%A8%98.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APIGateway筆記</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/20211222_linqexpression.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linq Expression</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#筆記">筆記</a></li>
+    <li><a href="#protocal-buffers-檔案">protocal buffers 檔案</a></li>
+    <li><a href="#appsettings-使用http2">AppSettings 使用Http2</a></li>
+    <li><a href="#產生service-class檔案">產生Service class檔案</a></li>
+    <li><a href="#greeterservice-實作">GreeterService 實作</a></li>
+    <li><a href="#註冊grpc服務">註冊Grpc服務</a></li>
+    <li><a href="#新增grpc服務的reference">新增Grpc服務的reference</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

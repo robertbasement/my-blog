@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>IOS on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/ios/</link>
+    <description>Recent content in IOS on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 16 Dec 2021 13:10:12 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/ios/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>更新從來就沒有好事情</title>
+      <link>https://robertbasement.github.io/my-blog/posts/post/2021/20211216_%E6%9B%B4%E6%96%B0%E5%BE%9E%E4%BE%86%E5%B0%B1%E6%B2%92%E6%9C%89%E5%A5%BD%E4%BA%8B.md/</link>
+      <pubDate>Thu, 16 Dec 2021 13:10:12 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/posts/post/2021/20211216_%E6%9B%B4%E6%96%B0%E5%BE%9E%E4%BE%86%E5%B0%B1%E6%B2%92%E6%9C%89%E5%A5%BD%E4%BA%8B.md/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;案發原因&#34;&gt;案發原因&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;不知道有多久沒有更新我的Line了，也沒有什麼值得我更新的功能，這樣穩穩著用就挺好的，早上收到Line錢包提醒我必須在12/31號前更新到最新版，平常出門已經很習慣Pay來Pay去了，得很方便，所以只能更新了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;BOOM!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;更新完後Line直接閃退，再也打不開了，卸載重裝、重新開機都試過了，更新iOS到最新版本還是打不開，只好寫email給客服來處理，來回處理了兩天左右，客服發送消息給我說他們修正了問題，請至App Store更新最新版，這次更新完後終於可以登入了，還是要給他們的工程師點讚，這個效率算很快了。&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;BOOM!ANGIN!&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;p&gt;原以為事情到這裡就告一個段落了，沒想到更新後導致的問題一一浮現，平常在使用的iPad 3居然連不到我手機的熱點了，一查才發現iOS 15加強了wifi存取保護(Wi-Fi Protected Access)，從wpa2升級到wpa3，導致不支援wpa3的設備將無法連接，而我的iPad 3就這樣再也連不上網路了。更慘的是網路上查了一輪，還是沒找到解決方法。&lt;/p&gt;&#xA;&lt;p&gt;只能祈求之後會開放可以改wpa2的選項，雖然我覺得很難。._.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='閘道管制🚥'><title>APIGateway筆記</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2022/20220114_apigateway%E7%AD%86%E8%A8%98.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='APIGateway筆記'>
+<meta property='og:description' content='閘道管制🚥'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2022/20220114_apigateway%E7%AD%86%E8%A8%98.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C#' /><meta property='article:tag' content='Ocelot' /><meta property='article:tag' content='NuGet' /><meta property='article:published_time' content='2022-01-14T13:20:59&#43;08:00'/><meta property='article:modified_time' content='2022-01-14T13:20:59&#43;08:00'/>
+<meta name="twitter:title" content="APIGateway筆記">
+<meta name="twitter:description" content="閘道管制🚥">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/c%23/" >
+                C#
+            </a>
+        
+            <a href="/my-blog/categories/ocelot/" >
+                Ocelot
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2022/20220114_apigateway%E7%AD%86%E8%A8%98.md/">APIGateway筆記</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        閘道管制🚥
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Jan 14, 2022</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="筆記">筆記</h2></blockquote>
+<p>Api Gateway的設計有好幾種，通常來說一般只用一個Api Gw來當一個入口並不是個好主意，可以設計成SPA網頁用一個、手機App用一個、傳統網站用一個。</p>
+<p>這邊使用的Api Gw是<a class="link" href="https://github.com/ThreeMammals/Ocelot"  target="_blank" rel="noopener"
+    >Ocelot</a></p>
+<p>Ocelot是一個輕量化、容易擴充、開源的專案👍</p>
+<blockquote>
+<h2 id="前置作業">前置作業</h2></blockquote>
+<p>開啟新專案 &raquo; Empty .Net Project</p>
+<p>NuGet安裝必要套件Ocelot</p>
+<p>如果要使用快取功能的話，還要安裝Ocelot.Cache.CacheManager</p>
+<hr>
+<h3 id="註冊與使用ocelot服務">註冊與使用Ocelot服務</h3>
+<p>要使用快取功能才要加上<code>AddCacheManager</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">services</span><span class="p">.</span><span class="n">AddOcelot</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="n">AddCacheManager</span><span class="p">(</span><span class="n">settings</span> <span class="p">=&gt;</span> <span class="n">settings</span><span class="p">.</span><span class="n">WithDictionaryHandle</span><span class="p">());</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">async</span> <span class="k">void</span> <span class="n">Configure</span><span class="p">(</span><span class="n">IApplicationBuilder</span> <span class="n">app</span><span class="p">,</span> <span class="n">IWebHostEnvironment</span> <span class="n">env</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//前略...</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">app</span><span class="p">.</span><span class="n">UseOcelot</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立閘道路由json檔案">建立閘道路由json檔案</h3>
+<p>建立一個類似appsettings.json依照環境是Development還是Debug來覆寫的檔案</p>
+<ul>
+<li>ocelot.json(維持空的)
+<ul>
+<li>ocelot.Development.json</li>
+<li>ocelot.Local.json(本地測試)</li>
+</ul>
+</li>
+</ul>
+<p>依照命名VS會自動合併</p>
+<p>專案的環境變數ASPNETCORE_ENVIRONMENT要設定成Local</p>
+<hr>
+<h3 id="設定programcs">設定Program.cs</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">static</span> <span class="n">IHostBuilder</span> <span class="n">CreateHostBuilder</span><span class="p">(</span><span class="kt">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Host</span><span class="p">.</span><span class="n">CreateDefaultBuilder</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">ConfigureAppConfiguration</span><span class="p">((</span><span class="n">hostingContext</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">//會依照ASPNETCORE_ENVIRONMENT來讀取不同的檔案</span>
+</span></span><span class="line"><span class="cl">            <span class="n">config</span><span class="p">.</span><span class="n">AddJsonFile</span><span class="p">(</span><span class="s">$&#34;Ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json&#34;</span><span class="p">,</span> <span class="kc">true</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">ConfigureWebHostDefaults</span><span class="p">(</span><span class="n">webBuilder</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">webBuilder</span><span class="p">.</span><span class="n">UseStartup</span><span class="p">&lt;</span><span class="n">Startup</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">})</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="n">ConfigureLogging</span><span class="p">((</span><span class="n">hostBuilderContext</span><span class="p">,</span> <span class="n">loggingBuilder</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loggingBuilder</span><span class="p">.</span><span class="n">AddConfiguration</span><span class="p">(</span><span class="n">hostBuilderContext</span><span class="p">.</span><span class="n">Configuration</span><span class="p">.</span><span class="n">GetSection</span><span class="p">(</span><span class="s">&#34;Logging&#34;</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loggingBuilder</span><span class="p">.</span><span class="n">AddConsole</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="n">loggingBuilder</span><span class="p">.</span><span class="n">AddDebug</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="設定閘道路由">設定閘道路由</h2></blockquote>
+<p>在這邊設定連近來與連出去的位置，還可以加上額外設定，FileCacheOptions(檔案快取)、RateLimitOptions(流量管控)等等&hellip;</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-JSON" data-lang="JSON"><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;Routes&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Catalog API
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/api/v1/Catalog&#34;</span><span class="p">,</span><span class="c1">//要連接到的api路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nt">&#34;DownstreamScheme&#34;</span><span class="p">:</span> <span class="s2">&#34;http&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamHostAndPorts&#34;</span><span class="p">:</span> <span class="p">[</span><span class="c1">//要連到的server位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Host&#34;</span><span class="p">:</span> <span class="s2">&#34;localhost&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Port&#34;</span><span class="p">:</span> <span class="s2">&#34;8000&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;UpstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/Catalog&#34;</span><span class="p">,</span><span class="c1">//外面連到閘道的路由
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nt">&#34;UpstreamHttpMethod&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;POST&#34;</span><span class="p">,</span> <span class="s2">&#34;PUT&#34;</span> <span class="p">],</span><span class="c1">//允許的方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="nt">&#34;FileCacheOptions&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="nt">&#34;TtlSeconds&#34;</span><span class="p">:</span> <span class="mi">30</span> <span class="p">}</span><span class="c1">//檔案快取選項:設定存活時間
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/api/v1/Catalog/{id}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamScheme&#34;</span><span class="p">:</span> <span class="s2">&#34;http&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamHostAndPorts&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Host&#34;</span><span class="p">:</span> <span class="s2">&#34;localhost&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Port&#34;</span><span class="p">:</span> <span class="s2">&#34;8000&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;UpstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/Catalog/{id}&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;UpstreamHttpMethod&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&#34;GET&#34;</span><span class="p">,</span> <span class="s2">&#34;DELETE&#34;</span> <span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="p">},</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//Basket API
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/api/v1/Basket/Checkout&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamScheme&#34;</span><span class="p">:</span> <span class="s2">&#34;http&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;DownstreamHostAndPorts&#34;</span><span class="p">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Host&#34;</span><span class="p">:</span> <span class="s2">&#34;localhost&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">          <span class="nt">&#34;Port&#34;</span><span class="p">:</span> <span class="s2">&#34;8001&#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;UpstreamPathTemplate&#34;</span><span class="p">:</span> <span class="s2">&#34;/Basket/Checkout&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;UpstreamHttpMethod&#34;</span><span class="p">:</span> <span class="p">[</span> <span class="s2">&#34;POST&#34;</span> <span class="p">],</span>
+</span></span><span class="line"><span class="cl">      <span class="nt">&#34;RateLimitOptions&#34;</span><span class="p">:</span> <span class="p">{</span> <span class="c1">//限制請求量3秒內只有第一筆會被接受
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nt">&#34;ClientWhitelist&#34;</span><span class="p">:</span> <span class="p">[],</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;EnableRateLimiting&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Period&#34;</span><span class="p">:</span> <span class="s2">&#34;3s&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;PeriodTimespan&#34;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nt">&#34;Limit&#34;</span><span class="p">:</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="err">]</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;GlobalConfiguration&#34;</span><span class="p">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nt">&#34;BaseUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost:5010&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="gateway-aggregation-聚合模式">Gateway Aggregation 聚合模式</h2></blockquote>
+<p><figure 
+	>
+	<a href="/my-blog/images/20220114_Gw%e8%81%9a%e5%90%88%e6%a8%a1%e5%bc%8f.png" >
+		<img src="/my-blog/images/20220114_Gw%e8%81%9a%e5%90%88%e6%a8%a1%e5%bc%8f.png"
+			
+			
+			
+			loading="lazy"
+			>
+	</a>
+	
+</figure></p>
+<p>概念如圖所示，原本一個加入購物車的活動可能需要用到Catalog.API與Basket.API，需要經過閘道去多次呼叫特定API</p>
+<p>聚合模式下就是提供一個API，這個API會再去呼叫其他多個API</p>
+<hr>
+<h3 id="設定基礎服務">設定基礎服務</h3>
+<p>建立新專案後
+在appsettings加入要連線的Url</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-json" data-lang="json"><span class="line"><span class="cl"><span class="s2">&#34;ApiSettings&#34;</span><span class="err">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;CatalogUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost:8001&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;BasketUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost:8002&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nt">&#34;OrderingUrl&#34;</span><span class="p">:</span> <span class="s2">&#34;http://localhost:8003&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>在Startup設定HttpClient服務</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">void</span> <span class="n">ConfigureServices</span><span class="p">(</span><span class="n">IServiceCollection</span> <span class="n">services</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="p">&lt;</span><span class="n">ICatalogService</span><span class="p">,</span> <span class="n">CatalogService</span><span class="p">&gt;(</span><span class="n">c</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">Configuration</span><span class="p">[</span><span class="s">&#34;ApiSettings:CatalogUrl&#34;</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="p">&lt;</span><span class="n">IBasketService</span><span class="p">,</span> <span class="n">BasketService</span><span class="p">&gt;(</span><span class="n">c</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">Configuration</span><span class="p">[</span><span class="s">&#34;ApiSettings:BasketUrl&#34;</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">services</span><span class="p">.</span><span class="n">AddHttpClient</span><span class="p">&lt;</span><span class="n">IOrderService</span><span class="p">,</span> <span class="n">OrderService</span><span class="p">&gt;(</span><span class="n">c</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">c</span><span class="p">.</span><span class="n">BaseAddress</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Uri</span><span class="p">(</span><span class="n">Configuration</span><span class="p">[</span><span class="s">&#34;ApiSettings:OrderingUrl&#34;</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立要呼叫後端api輸入或輸出的model">建立要呼叫後端API輸入或輸出的model</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OrderResponseModel</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">TotalPrice</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// BillingAddress</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">EmailAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">AddressLine</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">State</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">ZipCode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Payment</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardNumber</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Expiration</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CVV</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">PaymentMethod</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立後端service">建立後端Service</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">OrderService</span> <span class="p">:</span> <span class="n">IOrderService</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">HttpClient</span> <span class="n">_client</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">OrderService</span><span class="p">(</span><span class="n">HttpClient</span> <span class="n">client</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_client</span> <span class="p">=</span> <span class="n">client</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">OrderResponseModel</span><span class="p">&gt;&gt;</span> <span class="n">GetOrdersByUserName</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">$&#34;api/v1/Order/{userName}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">dataAsString</span> <span class="p">=</span> <span class="k">await</span> <span class="n">response</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">().</span><span class="n">ConfigureAwait</span><span class="p">(</span><span class="kc">false</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">JsonSerializer</span><span class="p">.</span><span class="n">Deserialize</span><span class="p">&lt;</span><span class="n">List</span><span class="p">&lt;</span><span class="n">OrderResponseModel</span><span class="p">&gt;&gt;(</span><span class="n">dataAsString</span><span class="p">,</span> <span class="k">new</span> <span class="n">JsonSerializerOptions</span> <span class="p">{</span> <span class="n">PropertyNameCaseInsensitive</span> <span class="p">=</span> <span class="kc">true</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立controller">建立Controller</h3>
+<p>Controller被呼叫時，會去呼叫basketService、catalogService與orderService</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="na">[HttpGet(&#34;{userName}&#34;, Name = &#34;GetShopping&#34;)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">[ProducesResponseType(typeof(ShoppingModel), (int)HttpStatusCode.OK)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&lt;</span><span class="n">ShoppingModel</span><span class="p">&gt;&gt;</span> <span class="n">GetShopping</span><span class="p">(</span><span class="kt">string</span> <span class="n">userName</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">basket</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_basketService</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">(</span><span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">item</span> <span class="k">in</span> <span class="n">basket</span><span class="p">.</span><span class="n">Items</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">product</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_catalogService</span><span class="p">.</span><span class="n">GetProductById</span><span class="p">(</span><span class="n">item</span><span class="p">.</span><span class="n">ProductId</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">ProductName</span> <span class="p">=</span> <span class="n">product</span><span class="p">.</span><span class="n">Name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Category</span> <span class="p">=</span> <span class="n">product</span><span class="p">.</span><span class="n">Category</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Summary</span> <span class="p">=</span> <span class="n">product</span><span class="p">.</span><span class="n">Summary</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">Description</span> <span class="p">=</span> <span class="n">product</span><span class="p">.</span><span class="n">Description</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">item</span><span class="p">.</span><span class="n">ImageFile</span> <span class="p">=</span> <span class="n">product</span><span class="p">.</span><span class="n">ImageFile</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">orders</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_orderService</span><span class="p">.</span><span class="n">GetOrdersByUserName</span><span class="p">(</span><span class="n">userName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">shoppingModel</span> <span class="p">=</span> <span class="k">new</span> <span class="n">ShoppingModel</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">UserName</span> <span class="p">=</span> <span class="n">userName</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">BasketWithProduct</span> <span class="p">=</span> <span class="n">basket</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Orders</span> <span class="p">=</span> <span class="n">orders</span>
+</span></span><span class="line"><span class="cl">    <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Ok</span><span class="p">(</span><span class="n">shoppingModel</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><hr>
+<p>最後在原本的ocelotGateway的josn檔裡面設定這個api的位置就好了</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/c%23/">C#</a>
+        
+            <a href="/my-blog/tags/ocelot/">Ocelot</a>
+        
+            <a href="/my-blog/tags/nuget/">NuGet</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/20211125_automapper.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">AutoMapper - DI Version</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/test/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">測試df table</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/final_test2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Final_test2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220629_%E5%8F%8D%E5%B0%84%E6%96%B9%E6%B3%95%E7%B4%80%E9%8C%84.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C#反射方法紀錄</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2021/20211222_linqexpression.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Linq Expression</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#筆記">筆記</a></li>
+    <li><a href="#前置作業">前置作業</a>
+      <ol>
+        <li><a href="#註冊與使用ocelot服務">註冊與使用Ocelot服務</a></li>
+        <li><a href="#建立閘道路由json檔案">建立閘道路由json檔案</a></li>
+        <li><a href="#設定programcs">設定Program.cs</a></li>
+      </ol>
+    </li>
+    <li><a href="#設定閘道路由">設定閘道路由</a></li>
+    <li><a href="#gateway-aggregation-聚合模式">Gateway Aggregation 聚合模式</a>
+      <ol>
+        <li><a href="#設定基礎服務">設定基礎服務</a></li>
+        <li><a href="#建立要呼叫後端api輸入或輸出的model">建立要呼叫後端API輸入或輸出的model</a></li>
+        <li><a href="#建立後端service">建立後端Service</a></li>
+        <li><a href="#建立controller">建立Controller</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

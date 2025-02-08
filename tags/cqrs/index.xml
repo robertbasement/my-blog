@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>CQRS on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/cqrs/</link>
+    <description>Recent content in CQRS on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 01 Dec 2021 11:08:44 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/cqrs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>CQRS</title>
+      <link>https://robertbasement.github.io/my-blog/posts/post/2021/2021201_cqrs.md/</link>
+      <pubDate>Wed, 01 Dec 2021 11:08:44 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/posts/post/2021/2021201_cqrs.md/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;筆記&#34;&gt;筆記&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;CQRS(Command Query Responsibility Segregation)命令查詢分隔，目前看起來就是不再需要IRepository了，把它拆成Command(負責寫入資料庫的部分)與Query(只負責讀取的部分)。&lt;/p&gt;&#xA;&lt;p&gt;可以增加資料庫的效能，Command的部分則會透過event的形式記錄起來再同步到DB上面。&lt;/p&gt;&#xA;&lt;p&gt;我還是偏好原本的方法啊XD&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;參考&#34;&gt;參考&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://ithelp.ithome.com.tw/articles/10237458&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;&#xD;&#xA;    &gt;https://ithelp.ithome.com.tw/articles/10237458&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

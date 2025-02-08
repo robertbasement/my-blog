@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='🐰 🐰 🐰'><title>RabbitMQ筆記</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2021/20211228_rabbitmq%E7%AD%86%E8%A8%98.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='RabbitMQ筆記'>
+<meta property='og:description' content='🐰 🐰 🐰'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2021/20211228_rabbitmq%E7%AD%86%E8%A8%98.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='RabbitMQ' /><meta property='article:tag' content='Micorservices' /><meta property='article:published_time' content='2021-12-28T11:33:55&#43;08:00'/><meta property='article:modified_time' content='2021-12-28T11:33:55&#43;08:00'/>
+<meta name="twitter:title" content="RabbitMQ筆記">
+<meta name="twitter:description" content="🐰 🐰 🐰">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/rabbitmq/" >
+                RabbitMQ
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2021/20211228_rabbitmq%E7%AD%86%E8%A8%98.md/">RabbitMQ筆記</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        🐰 🐰 🐰
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 28, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="前置作業">前置作業</h2></blockquote>
+<p>RabbitMQ的兔兔icon怪可愛的，可以想像成郵局，可以收信也可以送信，是一堆兔兔幫你送信~🐰</p>
+<hr>
+<h3 id="安裝docker">安裝Docker</h3>
+<p>透過docker-compose來設定下載，alpine是輕量化體積較小的版本</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c">#docker-compose.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">abbitmq</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">image</span><span class="p">:</span><span class="w"> </span><span class="l">rabbitmq:3-management-alpine</span><span class="w">
+</span></span></span></code></pre></div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-yml" data-lang="yml"><span class="line"><span class="cl"><span class="c">#docker-compose.override.yml</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="nt">rabbitmq</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">container_name</span><span class="p">:</span><span class="w"> </span><span class="l">rabbitmq</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">restart</span><span class="p">:</span><span class="w"> </span><span class="l">always</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nt">ports</span><span class="p">:</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="s2">&#34;5672:5672&#34;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span>- <span class="s2">&#34;15672:15672&#34;</span><span class="w"> </span><span class="c">#DashBoard的port</span><span class="w">
+</span></span></span></code></pre></div><p>docker up上去後，測試看看能不能連線到localhost:15672，可以就會進到登入畫面，第一次直接登入帳密都是guest。</p>
+<hr>
+<h3 id="masstransit">MassTransit🚎</h3>
+<p>集體搭車去RabbitMQ的概念(?)，這是專給.Net用的套件，讓我們更簡單的去使用RabbitMQ的功能</p>
+<blockquote>
+<h2 id="建立event製造機">建立Event製造機</h2></blockquote>
+<p>建立EventBus.Messages項目專案</p>
+<p>安裝必要套件</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit.AspNetCore&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit.RabbitMQ&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></div><p>建立Base Event有ID與建構日期，讓其他Event去繼承它。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">IntegrationBaseEvent</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">IntegrationBaseEvent</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Id</span> <span class="p">=</span> <span class="n">Guid</span><span class="p">.</span><span class="n">NewGuid</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CreationDate</span> <span class="p">=</span> <span class="n">DateTime</span><span class="p">.</span><span class="n">UtcNow</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">IntegrationBaseEvent</span><span class="p">(</span><span class="n">Guid</span> <span class="n">id</span><span class="p">,</span> <span class="n">DateTime</span> <span class="n">createDate</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">Id</span> <span class="p">=</span> <span class="n">id</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">CreationDate</span> <span class="p">=</span> <span class="n">createDate</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">Guid</span> <span class="n">Id</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="kd">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">DateTime</span> <span class="n">CreationDate</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="kd">private</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>建立結帳Event</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">BasketCheckoutEvent</span> <span class="p">:</span> <span class="n">IntegrationBaseEvent</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">UserName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">decimal</span> <span class="n">TotalPrice</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// BillingAddress</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">FirstName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">LastName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">EmailAddress</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">AddressLine</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Country</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">State</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">ZipCode</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// Payment</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardName</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CardNumber</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">Expiration</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">string</span> <span class="n">CVV</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kt">int</span> <span class="n">PaymentMethod</span> <span class="p">{</span> <span class="k">get</span><span class="p">;</span> <span class="k">set</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>建立Common/EventBusConstants</p>
+<p>設定Queue的名子</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">EventBusConstants</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">const</span> <span class="kt">string</span> <span class="n">BasketCheckoutQueue</span> <span class="p">=</span> <span class="s">&#34;basketcheckout-queue&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="event發送端">Event發送端</h2></blockquote>
+<p>建立好EventBus.Messages後就可以開始來試著發送Event出去</p>
+<p>設定Dependencies添加EventBus.Messages</p>
+<p>安裝必要套件三件組後，在startup裡註冊MassTransit必要服務，並設定使用RabbitMq!</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-xml" data-lang="xml"><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit.AspNetCore&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="nt">&lt;PackageReference</span> <span class="na">Include=</span><span class="s">&#34;MassTransit.RabbitMQ&#34;</span> <span class="na">Version=</span><span class="s">&#34;7.1.6&#34;</span> <span class="nt">/&gt;</span>
+</span></span></code></pre></div><hr>
+<h3 id="註冊rabbitmq服務">註冊RabbitMQ服務</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//可以看到AddMassTransit需要輸入Action type的參數，就是委託把不確定的動作，交由呼叫端來寫。</span>
+</span></span><span class="line"><span class="cl"><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransit</span><span class="p">(</span><span class="n">config</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">config</span><span class="p">.</span><span class="n">UsingRabbitMq</span><span class="p">((</span><span class="n">context</span><span class="p">,</span> <span class="n">config</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//使用高級列隊協議amqp://帳號:密碼@網址:port (方便檢視，應該寫在appsettings)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">config</span><span class="p">.</span><span class="n">Host</span><span class="p">(</span><span class="s">&#34;amqp://guest:guest@localhost:5672&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransitHostedService</span><span class="p">();</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立發送event的api">建立發送Event的API</h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="na">[Route(&#34;[action]</span><span class="s">&#34;)]
+</span></span></span><span class="line"><span class="cl"><span class="s"></span><span class="na">[HttpPost]</span>
+</span></span><span class="line"><span class="cl"><span class="na">[ProducesResponseType((int)HttpStatusCode.Accepted)]</span>
+</span></span><span class="line"><span class="cl"><span class="na">[ProducesResponseType((int)HttpStatusCode.BadRequest)]</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span><span class="p">&lt;</span><span class="n">ActionResult</span><span class="p">&gt;</span> <span class="n">Checkout</span><span class="p">([</span><span class="n">FromBody</span><span class="p">]</span> <span class="n">BasketCheckout</span> <span class="n">basketCheckout</span><span class="p">)</span><span class="c1">//雖然說可以直接用BasketCheckoutEvent類型，但是分開寫日後維護上比較輕鬆。</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//取得購物車內總金額</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">basket</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_repository</span><span class="p">.</span><span class="n">GetBasket</span><span class="p">(</span><span class="n">basketCheckout</span><span class="p">.</span><span class="n">UserName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">basket</span> <span class="p">==</span> <span class="kc">null</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">BadRequest</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//建立BasketCheckout Event</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">var</span> <span class="n">eventMessage</span> <span class="p">=</span> <span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">BasketCheckoutEvent</span><span class="p">&gt;(</span><span class="n">basketCheckout</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//設定Event裡面的總金額</span>
+</span></span><span class="line"><span class="cl">    <span class="n">eventMessage</span><span class="p">.</span><span class="n">TotalPrice</span> <span class="p">=</span> <span class="n">basket</span><span class="p">.</span><span class="n">TotalPrice</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//傳送Event給RabbitMQ</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">_publishEndpoint</span><span class="p">.</span><span class="n">Publish</span><span class="p">(</span><span class="n">eventMessage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//清空購物車</span>
+</span></span><span class="line"><span class="cl">    <span class="k">await</span> <span class="n">_repository</span><span class="p">.</span><span class="n">DeleteBasket</span><span class="p">(</span><span class="n">basket</span><span class="p">.</span><span class="n">UserName</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">Accepted</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="event接收端">Event接收端</h2></blockquote>
+<p>老樣子，安裝必備套件，註冊服務，但是註冊的地方有點不一樣，需要多做一些設定。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransit</span><span class="p">(</span><span class="n">config</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//設定Event處理器BasketCheckoutConsumer(下面會建)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">config</span><span class="p">.</span><span class="n">AddConsumer</span><span class="p">&lt;</span><span class="n">BasketCheckoutConsumer</span><span class="p">&gt;();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">config</span><span class="p">.</span><span class="n">UsingRabbitMq</span><span class="p">((</span><span class="n">busRegistrationContext</span><span class="p">,</span> <span class="n">rabbitMqBusFactoryConfig</span><span class="p">)</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//使用高級列隊協議amqp://帳號:密碼@網址:port</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rabbitMqBusFactoryConfig</span><span class="p">.</span><span class="n">Host</span><span class="p">(</span><span class="n">Configuration</span><span class="p">[</span><span class="s">&#34;EventBusSettings:HostAddress&#34;</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">//設定接收端點(Queue的名子, (端點設定)=&gt;{設定Event處理器}</span>
+</span></span><span class="line"><span class="cl">        <span class="n">rabbitMqBusFactoryConfig</span><span class="p">.</span><span class="n">ReceiveEndpoint</span><span class="p">(</span><span class="n">EventBusConstants</span><span class="p">.</span><span class="n">BasketCheckoutQueue</span><span class="p">,</span> <span class="n">endpointConfig</span> <span class="p">=&gt;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="n">endpointConfig</span><span class="p">.</span><span class="n">ConfigureConsumer</span><span class="p">&lt;</span><span class="n">BasketCheckoutConsumer</span><span class="p">&gt;(</span><span class="n">busRegistrationContext</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="n">services</span><span class="p">.</span><span class="n">AddMassTransitHostedService</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">//也別忘記註冊我們的Event處理器</span>
+</span></span><span class="line"><span class="cl"><span class="n">services</span><span class="p">.</span><span class="n">AddScoped</span><span class="p">&lt;</span><span class="n">BasketCheckoutConsumer</span><span class="p">&gt;();</span>
+</span></span></code></pre></div><hr>
+<h3 id="建立event處理器">建立Event處理器</h3>
+<p>裡面的步驟很簡單，先把接收到RabbitMq裡面的Event Map成在Ordering.API可以用的格式，發送給mediator來處理，mediator會自動分類交由正確的的handler來處理接下來的邏輯，最後回傳結果。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//實作介面IConsumer&lt;要處理的Event&gt;，要與publish過來的Event同class。</span>
+</span></span><span class="line"><span class="cl"><span class="kd">public</span> <span class="k">class</span> <span class="nc">BasketCheckoutConsumer</span> <span class="p">:</span> <span class="n">IConsumer</span><span class="p">&lt;</span><span class="n">BasketCheckoutEvent</span><span class="p">&gt;</span><span class="c1">//</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IMediator</span> <span class="n">_mediator</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">IMapper</span> <span class="n">_mapper</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">private</span> <span class="k">readonly</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">BasketCheckoutConsumer</span><span class="p">&gt;</span> <span class="n">_logger</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="n">BasketCheckoutConsumer</span><span class="p">(</span><span class="n">IMediator</span> <span class="n">mediator</span><span class="p">,</span> <span class="n">IMapper</span> <span class="n">mapper</span><span class="p">,</span> <span class="n">ILogger</span><span class="p">&lt;</span><span class="n">BasketCheckoutConsumer</span><span class="p">&gt;</span> <span class="n">logger</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_mediator</span> <span class="p">=</span> <span class="n">mediator</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">mediator</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_mapper</span> <span class="p">=</span> <span class="n">mapper</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">mapper</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">        <span class="n">_logger</span> <span class="p">=</span> <span class="n">logger</span> <span class="p">??</span> <span class="k">throw</span> <span class="k">new</span> <span class="n">ArgumentNullException</span><span class="p">(</span><span class="n">nameof</span><span class="p">(</span><span class="n">logger</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">public</span> <span class="kd">async</span> <span class="n">Task</span> <span class="n">Consume</span><span class="p">(</span><span class="n">ConsumeContext</span><span class="p">&lt;</span><span class="n">BasketCheckoutEvent</span><span class="p">&gt;</span> <span class="n">context</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">command</span> <span class="p">=</span> <span class="n">_mapper</span><span class="p">.</span><span class="n">Map</span><span class="p">&lt;</span><span class="n">CheckoutOrderCommand</span><span class="p">&gt;(</span><span class="n">context</span><span class="p">.</span><span class="n">Message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">var</span> <span class="n">result</span> <span class="p">=</span> <span class="k">await</span> <span class="n">_mediator</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="n">command</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="n">_logger</span><span class="p">.</span><span class="n">LogInformation</span><span class="p">(</span><span class="s">&#34;BasketCheckoutEvent Consume成功~~ Order Id : {newOrderId}&#34;</span><span class="p">,</span> <span class="n">result</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><p>到這邊就可以在Basket.API產生Event，再透過rabbitmq傳送，最後Event交由Ording.API處理了</p>
+<blockquote>
+<h2 id="參考">參考</h2></blockquote>
+<p><a class="link" href="https://www.rabbitmq.com/getstarted.html"  target="_blank" rel="noopener"
+    >實作官網教學</a></p>
+<p><a class="link" href="https://ithelp.ithome.com.tw/articles/10239223"  target="_blank" rel="noopener"
+    >RabbitMQ介紹</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/rabbitmq/">RabbitMQ</a>
+        
+            <a href="/my-blog/tags/micorservices/">Micorservices</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220706_rabbitmq%E9%87%8D%E6%96%B0%E7%90%86%E8%A7%A3.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">RabbitMQ重新理解</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前置作業">前置作業</a>
+      <ol>
+        <li><a href="#安裝docker">安裝Docker</a></li>
+        <li><a href="#masstransit">MassTransit🚎</a></li>
+      </ol>
+    </li>
+    <li><a href="#建立event製造機">建立Event製造機</a></li>
+    <li><a href="#event發送端">Event發送端</a>
+      <ol>
+        <li><a href="#註冊rabbitmq服務">註冊RabbitMQ服務</a></li>
+        <li><a href="#建立發送event的api">建立發送Event的API</a></li>
+      </ol>
+    </li>
+    <li><a href="#event接收端">Event接收端</a>
+      <ol>
+        <li><a href="#建立event處理器">建立Event處理器</a></li>
+      </ol>
+    </li>
+    <li><a href="#參考">參考</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

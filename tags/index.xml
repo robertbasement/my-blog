@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tags on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/tags/</link>
+    <description>Recent content in Tags on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Feb 2025 23:59:14 +0800</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C#</title>
+      <link>https://robertbasement.github.io/my-blog/tags/c%23/</link>
+      <pubDate>Fri, 07 Feb 2025 23:59:14 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/c%23/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Firebase</title>
+      <link>https://robertbasement.github.io/my-blog/tags/firebase/</link>
+      <pubDate>Mon, 23 Jan 2023 01:19:38 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/firebase/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Flutter</title>
+      <link>https://robertbasement.github.io/my-blog/tags/flutter/</link>
+      <pubDate>Mon, 23 Jan 2023 01:19:38 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/flutter/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CMD</title>
+      <link>https://robertbasement.github.io/my-blog/tags/cmd/</link>
+      <pubDate>Fri, 20 Jan 2023 15:43:55 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/cmd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://robertbasement.github.io/my-blog/tags/linux/</link>
+      <pubDate>Fri, 20 Jan 2023 15:43:55 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/linux/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Windows</title>
+      <link>https://robertbasement.github.io/my-blog/tags/windows/</link>
+      <pubDate>Wed, 11 Jan 2023 17:41:47 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/windows/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DB</title>
+      <link>https://robertbasement.github.io/my-blog/tags/db/</link>
+      <pubDate>Fri, 14 Oct 2022 11:05:45 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/db/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hugo</title>
+      <link>https://robertbasement.github.io/my-blog/tags/hugo/</link>
+      <pubDate>Wed, 28 Sep 2022 14:24:26 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/hugo/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Markdown</title>
+      <link>https://robertbasement.github.io/my-blog/tags/markdown/</link>
+      <pubDate>Wed, 28 Sep 2022 14:24:26 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/markdown/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Micorservices</title>
+      <link>https://robertbasement.github.io/my-blog/tags/micorservices/</link>
+      <pubDate>Wed, 06 Jul 2022 15:04:29 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/micorservices/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>RabbitMQ</title>
+      <link>https://robertbasement.github.io/my-blog/tags/rabbitmq/</link>
+      <pubDate>Wed, 06 Jul 2022 15:04:29 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/rabbitmq/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>MongoDB</title>
+      <link>https://robertbasement.github.io/my-blog/tags/mongodb/</link>
+      <pubDate>Mon, 27 Jun 2022 14:07:21 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/mongodb/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>UML</title>
+      <link>https://robertbasement.github.io/my-blog/tags/uml/</link>
+      <pubDate>Wed, 26 Jan 2022 13:31:49 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/uml/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>NuGet</title>
+      <link>https://robertbasement.github.io/my-blog/tags/nuget/</link>
+      <pubDate>Fri, 14 Jan 2022 13:20:59 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/nuget/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Ocelot</title>
+      <link>https://robertbasement.github.io/my-blog/tags/ocelot/</link>
+      <pubDate>Fri, 14 Jan 2022 13:20:59 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/ocelot/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://robertbasement.github.io/my-blog/tags/docker/</link>
+      <pubDate>Mon, 27 Dec 2021 10:52:40 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/docker/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Shell</title>
+      <link>https://robertbasement.github.io/my-blog/tags/shell/</link>
+      <pubDate>Thu, 23 Dec 2021 09:46:07 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/shell/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Clean Architecture</title>
+      <link>https://robertbasement.github.io/my-blog/tags/clean-architecture/</link>
+      <pubDate>Wed, 22 Dec 2021 13:32:25 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/clean-architecture/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Disign Principle</title>
+      <link>https://robertbasement.github.io/my-blog/tags/disign-principle/</link>
+      <pubDate>Wed, 22 Dec 2021 13:32:25 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/disign-principle/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Network</title>
+      <link>https://robertbasement.github.io/my-blog/tags/network/</link>
+      <pubDate>Tue, 21 Dec 2021 13:22:15 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/network/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Hardware</title>
+      <link>https://robertbasement.github.io/my-blog/tags/hardware/</link>
+      <pubDate>Tue, 21 Dec 2021 09:41:12 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/hardware/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Life</title>
+      <link>https://robertbasement.github.io/my-blog/tags/life/</link>
+      <pubDate>Tue, 21 Dec 2021 09:41:12 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/life/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Automation</title>
+      <link>https://robertbasement.github.io/my-blog/tags/automation/</link>
+      <pubDate>Fri, 17 Dec 2021 17:09:56 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/automation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>FluentValidation</title>
+      <link>https://robertbasement.github.io/my-blog/tags/fluentvalidation/</link>
+      <pubDate>Thu, 16 Dec 2021 14:50:26 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/fluentvalidation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>IOS</title>
+      <link>https://robertbasement.github.io/my-blog/tags/ios/</link>
+      <pubDate>Thu, 16 Dec 2021 13:10:12 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/ios/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Line</title>
+      <link>https://robertbasement.github.io/my-blog/tags/line/</link>
+      <pubDate>Thu, 16 Dec 2021 13:10:12 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/line/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Regex</title>
+      <link>https://robertbasement.github.io/my-blog/tags/regex/</link>
+      <pubDate>Tue, 14 Dec 2021 13:08:10 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/regex/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Regular Expressions</title>
+      <link>https://robertbasement.github.io/my-blog/tags/regular-expressions/</link>
+      <pubDate>Tue, 14 Dec 2021 13:08:10 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/regular-expressions/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>XBOX</title>
+      <link>https://robertbasement.github.io/my-blog/tags/xbox/</link>
+      <pubDate>Mon, 13 Dec 2021 17:25:11 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/xbox/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>XGPU</title>
+      <link>https://robertbasement.github.io/my-blog/tags/xgpu/</link>
+      <pubDate>Mon, 13 Dec 2021 17:25:11 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/xgpu/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Animation</title>
+      <link>https://robertbasement.github.io/my-blog/tags/animation/</link>
+      <pubDate>Thu, 09 Dec 2021 13:29:52 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/animation/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Movies</title>
+      <link>https://robertbasement.github.io/my-blog/tags/movies/</link>
+      <pubDate>Thu, 09 Dec 2021 13:29:52 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/movies/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Investment</title>
+      <link>https://robertbasement.github.io/my-blog/tags/investment/</link>
+      <pubDate>Mon, 06 Dec 2021 10:55:10 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/investment/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>CQRS</title>
+      <link>https://robertbasement.github.io/my-blog/tags/cqrs/</link>
+      <pubDate>Wed, 01 Dec 2021 11:08:44 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/cqrs/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>DDD</title>
+      <link>https://robertbasement.github.io/my-blog/tags/ddd/</link>
+      <pubDate>Tue, 30 Nov 2021 14:30:40 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/ddd/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Domain Driven Design</title>
+      <link>https://robertbasement.github.io/my-blog/tags/domain-driven-design/</link>
+      <pubDate>Tue, 30 Nov 2021 14:30:40 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/domain-driven-design/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>SOLID</title>
+      <link>https://robertbasement.github.io/my-blog/tags/solid/</link>
+      <pubDate>Mon, 29 Nov 2021 16:10:40 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/solid/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>AutoMapper</title>
+      <link>https://robertbasement.github.io/my-blog/tags/automapper/</link>
+      <pubDate>Thu, 25 Nov 2021 14:55:07 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/automapper/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Grpc</title>
+      <link>https://robertbasement.github.io/my-blog/tags/grpc/</link>
+      <pubDate>Wed, 24 Nov 2021 10:12:35 +0800</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/tags/grpc/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>

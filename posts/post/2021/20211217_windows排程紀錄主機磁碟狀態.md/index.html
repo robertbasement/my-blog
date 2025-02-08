@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='雜事自動化'><title>windows排程紀錄主機磁碟狀態</title>
+
+<link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/post/2021/20211217_windows%E6%8E%92%E7%A8%8B%E7%B4%80%E9%8C%84%E4%B8%BB%E6%A9%9F%E7%A3%81%E7%A2%9F%E7%8B%80%E6%85%8B.md/'>
+
+<link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content='windows排程紀錄主機磁碟狀態'>
+<meta property='og:description' content='雜事自動化'>
+<meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/post/2021/20211217_windows%E6%8E%92%E7%A8%8B%E7%B4%80%E9%8C%84%E4%B8%BB%E6%A9%9F%E7%A3%81%E7%A2%9F%E7%8B%80%E6%85%8B.md/'>
+<meta property='og:site_name' content='RobertBasement'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='C#' /><meta property='article:tag' content='Windows' /><meta property='article:tag' content='Automation' /><meta property='article:published_time' content='2021-12-17T17:09:56&#43;08:00'/><meta property='article:modified_time' content='2021-12-17T17:09:56&#43;08:00'/>
+<meta name="twitter:title" content="windows排程紀錄主機磁碟狀態">
+<meta name="twitter:description" content="雜事自動化">
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-YZL9P8D9FJ');
+        }
+      </script>
+    </head>
+    <body class="
+    article-page has-toc
+">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex 
+    
+        extended
+    
+">
+    
+        <div id="article-toolbar">
+            <a href="https://robertbasement.github.io/my-blog/" class="back-home">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="15 6 9 12 15 18" />
+</svg>
+
+
+
+                <span>Back</span>
+            </a>
+        </div>
+    
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/my-blog/categories/c%23/" >
+                C#
+            </a>
+        
+            <a href="/my-blog/categories/windows/" >
+                Windows
+            </a>
+        
+    </header>
+    
+
+    <h2 class="article-title">
+        <a href="/my-blog/posts/post/2021/20211217_windows%E6%8E%92%E7%A8%8B%E7%B4%80%E9%8C%84%E4%B8%BB%E6%A9%9F%E7%A3%81%E7%A2%9F%E7%8B%80%E6%85%8B.md/">windows排程紀錄主機磁碟狀態</a>
+    </h2>
+
+    
+    <h3 class="article-subtitle">
+        雜事自動化
+    </h3>
+    
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 17, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+</div>
+</header>
+
+    <section class="article-content">
+    <blockquote>
+<h2 id="取得磁碟狀態">取得磁碟狀態</h2></blockquote>
+<p>工作上總是一堆鳥事，在甲方裡工作有時候又要處理一些完全沒有意義的雜事，浪費時間。</p>
+<p>總之因為不明原因，我需要每週紀錄主機的磁碟剩餘容量百分比&hellip;</p>
+<p>要取得磁碟訊息很簡單，使用System.IO的<code>DriveInfo.GetDrives()</code>可以取得所有磁碟，再把DriveInfo的屬性取出來</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">diskStatus</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">DriveInfo</span><span class="p">[]</span> <span class="n">allDrives</span> <span class="p">=</span> <span class="n">DriveInfo</span><span class="p">.</span><span class="n">GetDrives</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">foreach</span> <span class="p">(</span><span class="n">DriveInfo</span> <span class="n">d</span> <span class="k">in</span> <span class="n">allDrives</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">IsReady</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span><span class="c1">//確定磁碟就緒</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">freePercent</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">d</span><span class="p">.</span><span class="n">TotalFreeSpace</span> <span class="p">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">d</span><span class="p">.</span><span class="n">TotalSize</span> <span class="p">*</span> <span class="m">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">diskStatus</span> <span class="p">+=</span> <span class="s">$&#34;  {d.Name}{freePercent}  &#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="寫入紀錄過時改由mail發送">寫入紀錄(過時，改由Mail發送)</h2></blockquote>
+<p>這邊一切以簡單為主，直接用寫入文字檔的方式來進行</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="c1">//如果有額外輸入檔案路徑的話，就把第一個參數當作路徑，沒有就丟在桌面</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//若不想在排程器那裡設定開始位置的話，就用絕對路徑吧。</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Length</span> <span class="p">==</span> <span class="m">1</span> <span class="p">?</span> <span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">:</span> <span class="s">&#34;DiskLog.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="c1">//記錄時間</span>
+</span></span><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">now</span> <span class="p">=</span> <span class="n">DateRime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">using</span> <span class="nn">StreamWriter</span> <span class="n">file</span> <span class="p">=</span> <span class="k">new</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">append</span><span class="p">:</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="n">file</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;{now}&gt;&gt; {diskStatus}&#34;</span><span class="p">);</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="新增排程">新增排程</h2></blockquote>
+<p>這邊基本就點點滑鼠就搞定了</p>
+<p>電腦管理 &raquo; 工作排程器 &raquo; 建立工作</p>
+<p>輸入名稱</p>
+<p>觸發程序 &raquo; 新增 &raquo; 每週</p>
+<p>動作 &raquo; 新增 &raquo; 程式或指令碼(選擇我們程式的exe檔) &raquo; 新增引數(輸入檔案路徑) &raquo; 開始位置(預設為C:\WINDOWS\System32)</p>
+<blockquote>
+<h2 id="加上錯誤處理">加上錯誤處理</h2></blockquote>
+<p>沒什麼意外是不會錯啦，但總是有意外XD，加個try..catch處理就好，最後大概如下。</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="k">try</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">diskStatus</span> <span class="p">=</span> <span class="s">&#34;&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">DriveInfo</span><span class="p">[]</span> <span class="n">allDrives</span> <span class="p">=</span> <span class="n">DriveInfo</span><span class="p">.</span><span class="n">GetDrives</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">foreach</span> <span class="p">(</span><span class="n">DriveInfo</span> <span class="n">d</span> <span class="k">in</span> <span class="n">allDrives</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">d</span><span class="p">.</span><span class="n">IsReady</span> <span class="p">==</span> <span class="kc">true</span><span class="p">)</span><span class="c1">//確定磁碟就緒</span>
+</span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">freePercent</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)(</span><span class="n">d</span><span class="p">.</span><span class="n">TotalFreeSpace</span> <span class="p">/</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">d</span><span class="p">.</span><span class="n">TotalSize</span> <span class="p">*</span> <span class="m">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="n">diskStatus</span> <span class="p">+=</span> <span class="s">$&#34;  {d.Name}{freePercent}  &#34;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//如果有額外輸入檔案路徑的話，就把第一個參數當作路徑，沒有就丟在桌面</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//若不想在排程器那裡設定開始位置的話，就用絕對路徑吧。</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">path</span> <span class="p">=</span> <span class="n">args</span><span class="p">.</span><span class="n">Length</span> <span class="p">==</span> <span class="m">1</span> <span class="p">?</span> <span class="n">args</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">:</span> <span class="s">&#34;DiskLog.txt&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">//記錄時間</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">string</span> <span class="n">now</span> <span class="p">=</span> <span class="n">DateRime</span><span class="p">.</span><span class="n">Now</span><span class="p">.</span><span class="n">ToString</span><span class="p">(</span><span class="s">&#34;yyyy/MM/dd HH:mm:ss&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">using</span> <span class="nn">StreamWriter</span> <span class="n">file</span> <span class="p">=</span> <span class="k">new</span> <span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">append</span><span class="p">:</span> <span class="kc">true</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">file</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="s">$&#34;{now}&gt;&gt; {diskStatus}&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="k">catch</span><span class="p">(</span><span class="n">Exception</span> <span class="n">ex</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">WriteLine</span><span class="p">(</span><span class="n">ex</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Console</span><span class="p">.</span><span class="n">ReadKey</span><span class="p">();</span><span class="c1">//卡個畫面</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="取得ip與發送email服務更新">取得IP與發送Email服務(更新)</h2></blockquote>
+<p>取得本機IP位置</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kt">string</span> <span class="n">ip</span> <span class="p">=</span> <span class="n">Dns</span><span class="p">.</span><span class="n">GetHostEntry</span><span class="p">(</span><span class="n">Dns</span><span class="p">.</span><span class="n">GetHostName</span><span class="p">()).</span><span class="n">AddressList</span>
+</span></span><span class="line"><span class="cl">               <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">q</span> <span class="p">=&gt;</span> <span class="n">q</span><span class="p">.</span><span class="n">AddressFamily</span> <span class="p">==</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">Sockets</span><span class="p">.</span><span class="n">AddressFamily</span><span class="p">.</span><span class="n">InterNetwork</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">               <span class="p">.</span><span class="n">FirstOrDefault</span><span class="p">().</span><span class="n">ToString</span><span class="p">();</span>
+</span></span></code></pre></div><p>發送Mail</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="kd">private</span> <span class="kd">static</span> <span class="k">void</span> <span class="n">SendMail</span><span class="p">(</span><span class="kt">string</span> <span class="n">now</span><span class="p">,</span> <span class="kt">string</span> <span class="n">ip</span><span class="p">,</span> <span class="kt">string</span> <span class="n">diskStatus</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">MailMessage</span> <span class="n">mailMsg</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MailMessage</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mailMsg</span><span class="p">.</span><span class="n">Subject</span> <span class="p">=</span> <span class="s">$&#34;{ip} &gt;&gt; {dickStatus}&#34;</span><span class="p">;</span> <span class="c1">//主旨</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mailMsg</span><span class="p">.</span><span class="n">To</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">MailAddress</span><span class="p">(</span><span class="s">&#34;xxx@gmail.com&#34;</span><span class="p">));</span><span class="c1">//收件人地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mailMsg</span><span class="p">.</span><span class="n">From</span> <span class="p">=</span> <span class="k">new</span> <span class="n">MailAddress</span><span class="p">(</span><span class="s">&#34;ooo@gmail.com&#34;</span><span class="p">,</span> <span class="s">&#34;主機紀錄機器人&#34;</span><span class="p">);</span><span class="c1">//寄件人地址</span>
+</span></span><span class="line"><span class="cl">    <span class="n">mailMsg</span><span class="p">.</span><span class="n">Body</span> <span class="p">=</span> <span class="s">$&#34;{ip} &gt;&gt; {dickStatus}&#34;</span><span class="p">;</span> <span class="c1">//內文</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">//設定mail server</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SmtpClient</span> <span class="n">client</span> <span class="p">=</span> <span class="k">new</span> <span class="n">SmtpClient</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">Credentials</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">NetworkCredential</span><span class="p">(</span><span class="s">&#34;XXX@gmail.com&#34;</span><span class="p">,</span> <span class="s">&#34;****&#34;</span><span class="p">);</span> <span class="c1">//這裡要填正確的帳號跟密碼</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">Host</span> <span class="p">=</span> <span class="s">&#34;smtp.gmail.com&#34;</span><span class="p">;</span> <span class="c1">//設定smtp Server</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">Port</span> <span class="p">=</span> <span class="m">25</span><span class="p">;</span> <span class="c1">//設定Port</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">EnableSsl</span> <span class="p">=</span> <span class="kc">true</span><span class="p">;</span> <span class="c1">//gmail預設開啟驗證</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="n">mailMsg</span><span class="p">);</span> <span class="c1">//寄出信件</span>
+</span></span><span class="line"><span class="cl">    <span class="n">client</span><span class="p">.</span><span class="n">Dispose</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></div><blockquote>
+<h2 id="參考">參考</h2></blockquote>
+<p><a class="link" href="https://docs.microsoft.com/zh-tw/dotnet/api/system.io.driveinfo.getdrives?view=net-6.0"  target="_blank" rel="noopener"
+    >https://docs.microsoft.com/zh-tw/dotnet/api/system.io.driveinfo.getdrives?view=net-6.0</a></p>
+<p><a class="link" href="https://ithelp.ithome.com.tw/articles/10190120"  target="_blank" rel="noopener"
+    >https://ithelp.ithome.com.tw/articles/10190120</a></p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/my-blog/tags/c%23/">C#</a>
+        
+            <a href="/my-blog/tags/windows/">Windows</a>
+        
+            <a href="/my-blog/tags/automation/">Automation</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    <aside class="related-contents--wrapper">
+    
+    
+        <h2 class="section-title">Related contents</h2>
+        <div class="related-contents">
+            <div class="flex article-list--tile">
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/test/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">測試df table</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/final_test2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Final_test2</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2023/20230111_%E5%8C%AF%E5%85%A5%E6%86%91%E8%AD%89%E8%87%B3%E9%9B%BB%E8%85%A6%E4%B8%A6%E6%AA%A2%E6%9F%A5%E6%86%91%E8%AD%89%E6%97%A5%E6%9C%9F.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">匯入憑證至電腦並檢查憑證日期</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220629_%E5%8F%8D%E5%B0%84%E6%96%B9%E6%B3%95%E7%B4%80%E9%8C%84.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">C#反射方法紀錄</h2>
+        </div>
+    </a>
+</article>
+                
+                    
+<article class="">
+    <a href="/my-blog/posts/post/2022/20220114_apigateway%E7%AD%86%E8%A8%98.md/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">APIGateway筆記</h2>
+        </div>
+    </a>
+</article>
+                
+            </div>
+        </div>
+    
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2021 - 
+        
+        2025 RobertBasement
+    </section>
+    
+    <section class="powerby">
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.2.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> &emsp;
+        
+        
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer="true"
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.css"integrity="sha256-c0uckgykQ9v5k&#43;IqViZOZKc47Jn7KQil4/MP3ySA3F8="crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.css"integrity="sha256-SBLU4vv6CA6lHsZ1XyTdhyjJxCjPif/TRkjnsyGAGnE="crossorigin="anonymous"
+            >
+
+            </main>
+    
+        <aside class="sidebar right-sidebar sticky">
+            <section class="widget archives">
+                <div class="widget-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+                </div>
+                <h2 class="widget-title section-title">Table of contents</h2>
+                
+                <div class="widget--toc">
+                    <nav id="TableOfContents">
+  <ol>
+    <li><a href="#取得磁碟狀態">取得磁碟狀態</a></li>
+    <li><a href="#寫入紀錄過時改由mail發送">寫入紀錄(過時，改由Mail發送)</a></li>
+    <li><a href="#新增排程">新增排程</a></li>
+    <li><a href="#加上錯誤處理">加上錯誤處理</a></li>
+    <li><a href="#取得ip與發送email服務更新">取得IP與發送Email服務(更新)</a></li>
+    <li><a href="#參考">參考</a></li>
+  </ol>
+</nav>
+                </div>
+            </section>
+        </aside>
+    
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.5/dist/vibrant.min.js"integrity="sha256-5NovOZc4iwiAWTYIFiIM7DxKUXKWvpVEuMEPLzcm5/g="crossorigin="anonymous"
+                defer="false"
+                >
+            </script><script type="text/javascript" src="/my-blog/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

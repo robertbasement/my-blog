@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Pages on RobertBasement</title>
+    <link>https://robertbasement.github.io/my-blog/page/</link>
+    <description>Recent content in Pages on RobertBasement</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 09 Dec 2021 00:00:00 +0000</lastBuildDate>
+    <atom:link href="https://robertbasement.github.io/my-blog/page/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About</title>
+      <link>https://robertbasement.github.io/my-blog/about/</link>
+      <pubDate>Thu, 09 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/about/</guid>
+      <description>&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;關於我&#34;&gt;關於我&lt;/h2&gt;&lt;/blockquote&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;h2 id=&#34;關於部落格&#34;&gt;關於部落格&lt;/h2&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Archives</title>
+      <link>https://robertbasement.github.io/my-blog/archives/</link>
+      <pubDate>Tue, 28 May 2019 00:00:00 +0000</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/archives/</guid>
+      <description></description>
+    </item>
+    <item>
+      <title>Search</title>
+      <link>https://robertbasement.github.io/my-blog/search/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://robertbasement.github.io/my-blog/search/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
