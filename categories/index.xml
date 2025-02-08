@@ -16,48 +16,6 @@
       <description></description>
     </item>
     <item>
-      <title>Firebase</title>
-      <link>https://robertbasement.github.io/my-blog/categories/firebase/</link>
-      <pubDate>Mon, 23 Jan 2023 01:19:38 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/firebase/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Flutter</title>
-      <link>https://robertbasement.github.io/my-blog/categories/flutter/</link>
-      <pubDate>Mon, 23 Jan 2023 01:19:38 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/flutter/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>CMD</title>
-      <link>https://robertbasement.github.io/my-blog/categories/cmd/</link>
-      <pubDate>Fri, 20 Jan 2023 15:43:55 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/cmd/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Linux</title>
-      <link>https://robertbasement.github.io/my-blog/categories/linux/</link>
-      <pubDate>Fri, 20 Jan 2023 15:43:55 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/linux/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Windows</title>
-      <link>https://robertbasement.github.io/my-blog/categories/windows/</link>
-      <pubDate>Wed, 11 Jan 2023 17:41:47 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/windows/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>DB</title>
-      <link>https://robertbasement.github.io/my-blog/categories/db/</link>
-      <pubDate>Fri, 14 Oct 2022 11:05:45 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/db/</guid>
-      <description></description>
-    </item>
-    <item>
       <title>Hugo</title>
       <link>https://robertbasement.github.io/my-blog/categories/hugo/</link>
       <pubDate>Wed, 28 Sep 2022 14:24:26 +0800</pubDate>
@@ -69,90 +27,6 @@
       <link>https://robertbasement.github.io/my-blog/categories/markdown/</link>
       <pubDate>Wed, 28 Sep 2022 14:24:26 +0800</pubDate>
       <guid>https://robertbasement.github.io/my-blog/categories/markdown/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>RabbitMQ</title>
-      <link>https://robertbasement.github.io/my-blog/categories/rabbitmq/</link>
-      <pubDate>Wed, 06 Jul 2022 15:04:29 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/rabbitmq/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>MongoDB</title>
-      <link>https://robertbasement.github.io/my-blog/categories/mongodb/</link>
-      <pubDate>Mon, 27 Jun 2022 14:07:21 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/mongodb/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>UML</title>
-      <link>https://robertbasement.github.io/my-blog/categories/uml/</link>
-      <pubDate>Wed, 26 Jan 2022 13:31:49 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/uml/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Ocelot</title>
-      <link>https://robertbasement.github.io/my-blog/categories/ocelot/</link>
-      <pubDate>Fri, 14 Jan 2022 13:20:59 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/ocelot/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Docker</title>
-      <link>https://robertbasement.github.io/my-blog/categories/docker/</link>
-      <pubDate>Mon, 27 Dec 2021 10:52:40 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/docker/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Shell</title>
-      <link>https://robertbasement.github.io/my-blog/categories/shell/</link>
-      <pubDate>Thu, 23 Dec 2021 09:46:07 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/shell/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Disign Principle</title>
-      <link>https://robertbasement.github.io/my-blog/categories/disign-principle/</link>
-      <pubDate>Wed, 22 Dec 2021 13:32:25 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/disign-principle/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Network</title>
-      <link>https://robertbasement.github.io/my-blog/categories/network/</link>
-      <pubDate>Tue, 21 Dec 2021 13:22:15 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/network/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Life</title>
-      <link>https://robertbasement.github.io/my-blog/categories/life/</link>
-      <pubDate>Tue, 21 Dec 2021 09:41:12 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/life/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Nuget</title>
-      <link>https://robertbasement.github.io/my-blog/categories/nuget/</link>
-      <pubDate>Thu, 16 Dec 2021 14:50:26 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/nuget/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Investment</title>
-      <link>https://robertbasement.github.io/my-blog/categories/investment/</link>
-      <pubDate>Mon, 06 Dec 2021 10:55:10 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/investment/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Micorservices</title>
-      <link>https://robertbasement.github.io/my-blog/categories/micorservices/</link>
-      <pubDate>Wed, 24 Nov 2021 10:12:35 +0800</pubDate>
-      <guid>https://robertbasement.github.io/my-blog/categories/micorservices/</guid>
       <description></description>
     </item>
     <item>

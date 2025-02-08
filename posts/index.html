@@ -1,17 +1,20 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=''><title></title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='from cmoney.client import CMoneyDownloader host_addr = &#39;192.168.1.56&#39; dl = CMoneyDownloader(host_addr) event_df = await dl.query(&#39;日個股事件&#39;, start=&#39;20150101&#39;) import pandas as pd import numpy as np import matplotlib.pyplot as plt company_event = pd.read_feather(&#39;/Users/roberthsu/Documents/TrendForce_project/cmoney_warehouse/daily/company_event.ftr&#39;) SUB_TICKERS = [&#39;2059&#39;, &#39;3529&#39;, &#39;2383&#39;, &#39;2330&#39;, &#39;8069&#39;, &#39;5274&#39;, &#39;3008&#39;, &#39;2454&#39;, &#39;3533&#39;] company_event = company_event[company_event[&#39;股票代號&#39;].isin(SUB_TICKERS)] company_event.columns Index([&#39;日期&#39;, &#39;股票代號&#39;, &#39;股票名稱&#39;, &#39;月營收公告&#39;, &#39;財報公告&#39;, &#39;除息日&#39;, &#39;除權日&#39;, &#39;法說會&#39;, &#39;減資前&#39;, &#39;減資後&#39;, &#39;股東會&#39;, &#39;申報轉讓&#39;, &#39;庫藏股&#39;, &#39;注意股票&#39;, &#39;新股上市&#39;, &#39;人事異動&#39;, &#39;停資&#39;, &#39;停券&#39;, &#39;最後回補日&#39;, &#39;今日事件數&#39;, &#39;RTIME&#39;], dtype=&#39;object&#39;) company_event.loc[~company_event[&#39;減資前&#39;].isna(), [&#39;日期&#39;, &#39;股票代號&#39;]] company_event.columns 400張以上大戶持股比例數據異常
+company_event.loc[(company_event[&#39;新股上市&#39;]==0) , [&#39;日期&#39;, &#39;股票代號&#39;]].iloc[-20::] .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; } '><title></title>
 
 <link rel='canonical' href='https://robertbasement.github.io/my-blog/posts/'>
 
 <link rel="stylesheet" href="/my-blog/scss/style.min.css"><meta property='og:title' content=''>
-<meta property='og:description' content=''>
+<meta property='og:description' content='from cmoney.client import CMoneyDownloader host_addr = &#39;192.168.1.56&#39; dl = CMoneyDownloader(host_addr) event_df = await dl.query(&#39;日個股事件&#39;, start=&#39;20150101&#39;) import pandas as pd import numpy as np import matplotlib.pyplot as plt company_event = pd.read_feather(&#39;/Users/roberthsu/Documents/TrendForce_project/cmoney_warehouse/daily/company_event.ftr&#39;) SUB_TICKERS = [&#39;2059&#39;, &#39;3529&#39;, &#39;2383&#39;, &#39;2330&#39;, &#39;8069&#39;, &#39;5274&#39;, &#39;3008&#39;, &#39;2454&#39;, &#39;3533&#39;] company_event = company_event[company_event[&#39;股票代號&#39;].isin(SUB_TICKERS)] company_event.columns Index([&#39;日期&#39;, &#39;股票代號&#39;, &#39;股票名稱&#39;, &#39;月營收公告&#39;, &#39;財報公告&#39;, &#39;除息日&#39;, &#39;除權日&#39;, &#39;法說會&#39;, &#39;減資前&#39;, &#39;減資後&#39;, &#39;股東會&#39;, &#39;申報轉讓&#39;, &#39;庫藏股&#39;, &#39;注意股票&#39;, &#39;新股上市&#39;, &#39;人事異動&#39;, &#39;停資&#39;, &#39;停券&#39;, &#39;最後回補日&#39;, &#39;今日事件數&#39;, &#39;RTIME&#39;], dtype=&#39;object&#39;) company_event.loc[~company_event[&#39;減資前&#39;].isna(), [&#39;日期&#39;, &#39;股票代號&#39;]] company_event.columns 400張以上大戶持股比例數據異常
+company_event.loc[(company_event[&#39;新股上市&#39;]==0) , [&#39;日期&#39;, &#39;股票代號&#39;]].iloc[-20::] .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; } '>
 <meta property='og:url' content='https://robertbasement.github.io/my-blog/posts/'>
 <meta property='og:site_name' content='RobertBasement'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' />
 <meta name="twitter:title" content="">
-<meta name="twitter:description" content="">
+<meta name="twitter:description" content="from cmoney.client import CMoneyDownloader host_addr = &#39;192.168.1.56&#39; dl = CMoneyDownloader(host_addr) event_df = await dl.query(&#39;日個股事件&#39;, start=&#39;20150101&#39;) import pandas as pd import numpy as np import matplotlib.pyplot as plt company_event = pd.read_feather(&#39;/Users/roberthsu/Documents/TrendForce_project/cmoney_warehouse/daily/company_event.ftr&#39;) SUB_TICKERS = [&#39;2059&#39;, &#39;3529&#39;, &#39;2383&#39;, &#39;2330&#39;, &#39;8069&#39;, &#39;5274&#39;, &#39;3008&#39;, &#39;2454&#39;, &#39;3533&#39;] company_event = company_event[company_event[&#39;股票代號&#39;].isin(SUB_TICKERS)] company_event.columns Index([&#39;日期&#39;, &#39;股票代號&#39;, &#39;股票名稱&#39;, &#39;月營收公告&#39;, &#39;財報公告&#39;, &#39;除息日&#39;, &#39;除權日&#39;, &#39;法說會&#39;, &#39;減資前&#39;, &#39;減資後&#39;, &#39;股東會&#39;, &#39;申報轉讓&#39;, &#39;庫藏股&#39;, &#39;注意股票&#39;, &#39;新股上市&#39;, &#39;人事異動&#39;, &#39;停資&#39;, &#39;停券&#39;, &#39;最後回補日&#39;, &#39;今日事件數&#39;, &#39;RTIME&#39;], dtype=&#39;object&#39;) company_event.loc[~company_event[&#39;減資前&#39;].isna(), [&#39;日期&#39;, &#39;股票代號&#39;]] company_event.columns 400張以上大戶持股比例數據異常
+company_event.loc[(company_event[&#39;新股上市&#39;]==0) , [&#39;日期&#39;, &#39;股票代號&#39;]].iloc[-20::] .dataframe tbody tr th { vertical-align: top; } .dataframe thead th { text-align: right; } ">
       <script async src="https://www.googletagmanager.com/gtag/js?id=G-YZL9P8D9FJ"></script>
       <script>
         var doNotTrack = false;
@@ -99,7 +102,7 @@
 
 
                 <time class="article-time--reading">
-                    0 minute read
+                    37 minute read
                 </time>
             </div>
         
