@@ -3471,21 +3471,37 @@ min, max 作為河流 對照如今的 預知PE&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;有一個問題是 轉換後圖會被存在另一個folder中&lt;br&gt;
 假設你的jupyter file叫 test.ipynb 在轉換的output dir中還會有一個folder 叫 test_files.ipynb
 此時可以把你的圖片都丟到 static/images中
-並用以下command line 將圖片的url做修改&lt;/p&gt;
+並用以下command line&lt;br&gt;
+將圖片的url做修改&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sed&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&#34;sc&#34;&gt;&amp;#39; &amp;#39;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;s&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;your_notebook_files&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;//\/images\//g&amp;#39; your_notebook.md
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h3 id=&#34;開幾本地server&#34;&gt;開幾本地server&lt;/h3&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;hugo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;server&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;先在本地測試預覽用的&lt;/p&gt;
-&lt;h3 id=&#34;打包成靜態網頁檔&#34;&gt;打包成靜態網頁檔&lt;/h3&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-c&#34; data-lang=&#34;c&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;hugo&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;hugo&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;d&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GitHub&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MindBreaker3310&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;github&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;io&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;執行完後，打包的靜態網頁會輸出在&lt;code&gt;public/&lt;/code&gt;資料夾下&lt;/p&gt;
-&lt;p&gt;或是給他destination flag輸出到指定資料夾&lt;/p&gt;
+&lt;h3 id=&#34;打包成靜態網頁檔每次更新過blog內容後&#34;&gt;打包成靜態網頁檔(每次更新過blog內容後)&lt;/h3&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo -D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;執行完後，打包的靜態網頁會輸出在&lt;code&gt;public/&lt;/code&gt;資料夾下&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h2 id=&#34;github-page相關&#34;&gt;GitHub Page相關&lt;/h2&gt;&lt;/blockquote&gt;
-&lt;p&gt;我這邊是打包成靜態網頁檔直接蓋掉Github Page對應在本機的檔案&lt;/p&gt;
-&lt;p&gt;接著commit push收工&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在root的.gitignore 要加上 public/&lt;/li&gt;
+&lt;li&gt;git init public folder&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;cd public
+git init
+git remote add origin https://github.com/username/my-hugo-site.git
+&lt;/code&gt;&lt;/pre&gt;&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;push to github&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;git add .
+git commit -m &amp;#34;Deploy Hugo site&amp;#34;
+git branch -M main
+git push -f origin main
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;
+若是網站有更新過後
+要回到root 並重跑&lt;/p&gt;
+&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;hugo -D
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;之後重複step 3.&lt;br&gt;
+(不用在git init, 即使hugo -D 會更新public folder的內容 但不是全部刪除 所以第一次的git init 還是能track)&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h2 id=&#34;markdown相關&#34;&gt;MarkDown相關&lt;/h2&gt;&lt;/blockquote&gt;
 &lt;p&gt;&lt;code&gt;&amp;gt;## MarkDown相關&lt;/code&gt;&lt;/p&gt;
@@ -3500,27 +3516,12 @@ min, max 作為河流 對照如今的 預知PE&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;列表的Fu&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;code&gt;![圖片下方的文字](images/圖片檔名.jpg)&lt;/code&gt;&lt;/p&gt;
-&lt;p&gt;&lt;figure 
-	&gt;
-	&lt;a href=&#34;https://robertbasement.github.io/my-blog/&#34; &gt;
-		&lt;img src=&#34;https://robertbasement.github.io/my-blog/&#34;
-			
-			
-			
-			loading=&#34;lazy&#34;
-			alt=&#34;上圖片&#34;&gt;
-	&lt;/a&gt;
-	
-	&lt;figcaption&gt;上圖片&lt;/figcaption&gt;
-	
-&lt;/figure&gt;&lt;/p&gt;
 &lt;p&gt;其他有需要再去查吧
 &lt;a class=&#34;link&#34; href=&#34;https://markdown.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;https://markdown.tw/&lt;/a&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;h2 id=&#34;後記&#34;&gt;後記&lt;/h2&gt;&lt;/blockquote&gt;
-&lt;p&gt;希望未來還能持續更新，GOGO~&lt;/p&gt;
+&lt;p&gt;大致修改完成 也順過流程了&lt;/p&gt;
 </description>
         </item>
         <item>

@@ -158,21 +158,37 @@
 </span></span></code></pre></div><p>有一個問題是 轉換後圖會被存在另一個folder中<br>
 假設你的jupyter file叫 test.ipynb 在轉換的output dir中還會有一個folder 叫 test_files.ipynb
 此時可以把你的圖片都丟到 static/images中
-並用以下command line 將圖片的url做修改</p>
+並用以下command line<br>
+將圖片的url做修改</p>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="err">&#39;</span><span class="sc">&#39; &#39;</span><span class="n">s</span><span class="o">/</span><span class="n">your_notebook_files</span><span class="err">\</span><span class="c1">//\/images\//g&#39; your_notebook.md
 </span></span></span></code></pre></div><h3 id="開幾本地server">開幾本地server</h3>
 <div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">hugo</span> <span class="n">server</span>
 </span></span></code></pre></div><p>先在本地測試預覽用的</p>
-<h3 id="打包成靜態網頁檔">打包成靜態網頁檔</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="n">hugo</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">hugo</span> <span class="o">-</span><span class="n">d</span> <span class="p">..</span><span class="o">/</span><span class="n">GitHub</span><span class="o">/</span><span class="n">MindBreaker3310</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span>
-</span></span></code></pre></div><p>執行完後，打包的靜態網頁會輸出在<code>public/</code>資料夾下</p>
-<p>或是給他destination flag輸出到指定資料夾</p>
+<h3 id="打包成靜態網頁檔每次更新過blog內容後">打包成靜態網頁檔(每次更新過blog內容後)</h3>
+<pre tabindex="0"><code>hugo -D
+</code></pre><p>執行完後，打包的靜態網頁會輸出在<code>public/</code>資料夾下</p>
 <blockquote>
 <h2 id="github-page相關">GitHub Page相關</h2></blockquote>
-<p>我這邊是打包成靜態網頁檔直接蓋掉Github Page對應在本機的檔案</p>
-<p>接著commit push收工</p>
+<ol>
+<li>在root的.gitignore 要加上 public/</li>
+<li>git init public folder</li>
+</ol>
+<pre tabindex="0"><code>cd public
+git init
+git remote add origin https://github.com/username/my-hugo-site.git
+</code></pre><ol start="3">
+<li>push to github</li>
+</ol>
+<pre tabindex="0"><code>git add .
+git commit -m &#34;Deploy Hugo site&#34;
+git branch -M main
+git push -f origin main
+</code></pre><p><strong>Note</strong>
+若是網站有更新過後
+要回到root 並重跑</p>
+<pre tabindex="0"><code>hugo -D
+</code></pre><p>之後重複step 3.<br>
+(不用在git init, 即使hugo -D 會更新public folder的內容 但不是全部刪除 所以第一次的git init 還是能track)</p>
 <blockquote>
 <h2 id="markdown相關">MarkDown相關</h2></blockquote>
 <p><code>&gt;## MarkDown相關</code></p>
@@ -187,27 +203,12 @@
 <ul>
 <li>列表的Fu</li>
 </ul>
-<p><code>![圖片下方的文字](images/圖片檔名.jpg)</code></p>
-<p><figure 
-	>
-	<a href="/my-blog/" >
-		<img src="/my-blog/"
-			
-			
-			
-			loading="lazy"
-			alt="上圖片">
-	</a>
-	
-	<figcaption>上圖片</figcaption>
-	
-</figure></p>
 <p>其他有需要再去查吧
 <a class="link" href="https://markdown.tw/"  target="_blank" rel="noopener"
     >https://markdown.tw/</a></p>
 <blockquote>
 <h2 id="後記">後記</h2></blockquote>
-<p>希望未來還能持續更新，GOGO~</p>
+<p>大致修改完成 也順過流程了</p>
 
 </section>
 
@@ -374,7 +375,7 @@
         <li><a href="#新增文章">新增文章</a></li>
         <li><a href="#文章調整">文章調整</a></li>
         <li><a href="#開幾本地server">開幾本地server</a></li>
-        <li><a href="#打包成靜態網頁檔">打包成靜態網頁檔</a></li>
+        <li><a href="#打包成靜態網頁檔每次更新過blog內容後">打包成靜態網頁檔(每次更新過blog內容後)</a></li>
       </ol>
     </li>
     <li><a href="#github-page相關">GitHub Page相關</a></li>
